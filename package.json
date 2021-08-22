@@ -8,9 +8,12 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@eva-design/eva": "^2.1.1",
     "@react-navigation/drawer": "^6.1.4",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
+    "@ui-kitten/components": "^5.1.1",
+    "@ui-kitten/eva-icons": "^5.1.1",
     "expo": "~42.0.1",
     "expo-status-bar": "~1.0.4",
     "react": "16.13.1",
@@ -18,8 +21,8 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "^2.2.0",
-    "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
+    "react-native-svg": "12.1.1",
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
@@ -36,5 +39,170 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "typescript": "~4.0.0"
   },
-  "private": true
+  "private": true,
+  "eslintConfig": {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "react/prop-types": "off",
+      "react/react-in-jsx-scope": "off",
+      "keyword-spacing": "error",
+      "arrow-spacing": "error",
+      "react/jsx-curly-brace-presence": [
+        "error",
+        {
+          "props": "always",
+          "children": "never"
+        }
+      ],
+      "sort-imports": [
+        "warn",
+        {
+          "memberSyntaxSortOrder": [
+            "all",
+            "single",
+            "multiple",
+            "none"
+          ]
+        }
+      ],
+      "padding-line-between-statements": [
+        "error",
+        {
+          "blankLine": "always",
+          "prev": [
+            "const",
+            "let",
+            "var",
+            "function",
+            "expression"
+          ],
+          "next": "*"
+        },
+        {
+          "blankLine": "always",
+          "prev": [
+            "const",
+            "let",
+            "var"
+          ],
+          "next": [
+            "const",
+            "let",
+            "var"
+          ]
+        }
+      ],
+      "array-bracket-spacing": [
+        "error",
+        "always"
+      ],
+      "array-bracket-newline": [
+        "error",
+        {
+          "multiline": true
+        }
+      ],
+      "@typescript-eslint/no-empty-interface": "off",
+      "object-curly-newline": [
+        "error",
+        {
+          "multiline": true
+        }
+      ],
+      "newline-before-return": "error",
+      "object-property-newline": [
+        "error",
+        {
+          "allowAllPropertiesOnSameLine": false
+        }
+      ],
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "array-element-newline": [
+        "error",
+        {
+          "multiline": true,
+          "minItems": 5
+        }
+      ],
+      "quotes": [
+        "error",
+        "double",
+        {
+          "allowTemplateLiterals": true
+        }
+      ],
+      "key-spacing": [
+        "error",
+        {
+          "align": "value",
+          "mode": "strict"
+        }
+      ],
+      "indent": [
+        "error",
+        "tab"
+      ],
+      "no-multi-spaces": [
+        "error",
+        {
+          "exceptions": {
+            "Property": true
+          }
+        }
+      ],
+      "prefer-const": [
+        "error",
+        {
+          "destructuring": "any",
+          "ignoreReadBeforeAssign": false
+        }
+      ],
+      "comma-dangle": [
+        "error",
+        {
+          "arrays": "always",
+          "objects": "always",
+          "imports": "always",
+          "exports": "always",
+          "functions": "never"
+        }
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-multiple-empty-lines": [
+        "error",
+        {
+          "max": 1
+        }
+      ],
+      "implicit-arrow-linebreak": [
+        "error",
+        "beside"
+      ],
+      "eol-last": [
+        "error",
+        "always"
+      ],
+      "jsx-quotes": [
+        "error",
+        "prefer-double"
+      ]
+    }
+  }
 }
