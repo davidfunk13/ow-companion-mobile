@@ -1,8 +1,8 @@
-import { AppRoute, } from "./app-routes";
+import { AppRoute, } from "../app-routes";
 import React from "react";
-import { TodoTabNavigationProp, } from "./home.navigator";
+import { TodoTabNavigationProp, } from "../AppStack/AppStack";
 import { CompositeNavigationProp, RouteProp, } from "@react-navigation/core";
-import { DoneAllIcon, GridIcon, } from "../assets/icons";
+import { DoneAllIcon, GridIcon, } from "../../assets/icons";
 import {
 	MaterialTopTabBarProps,
 	MaterialTopTabNavigationProp,
@@ -15,7 +15,7 @@ import {
 	TodoDoneScreen,
 	TodoInProgressScreen,
 	TodoTabBar,
-} from "../screens/todo";
+} from "../../screens/todo";
 
 type TodoNavigatorParams = {
   [AppRoute.TODO]: undefined;

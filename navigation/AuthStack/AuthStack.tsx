@@ -1,8 +1,8 @@
-import { AppNavigatorParams, } from "./app.navigator";
-import { AppRoute, } from "./app-routes";
+import { AppNavigatorParams, } from "../Navigation";
+import { AppRoute, } from "../app-routes";
 import React from "react";
 import { RouteProp, } from "@react-navigation/core";
-import { ResetPasswordScreen, SignInScreen, SignUpScreen, } from "../screens/auth";
+import { ResetPasswordScreen, SignInScreen, SignUpScreen, } from "../../screens/auth";
 import { StackNavigationProp, createStackNavigator, } from "@react-navigation/stack";
 
 type AuthNavigatorParams = AppNavigatorParams & {

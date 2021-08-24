@@ -4,6 +4,7 @@ export enum AppRoute {
   SIGN_UP = "Sign Up",
   RESET_PASSWORD = "Reset Passrord",
   HOME = "Home",
+  DASHBOARD = "Dashboard",
   TODO = "ToDo",
   TODO_IN_PROGRESS = "ToDo In Progress",
   TODO_DONE = "ToDo Done",

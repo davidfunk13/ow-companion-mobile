@@ -4,7 +4,7 @@ import { ProgressBar, } from "../../components/progress-bar.component";
 import React from "react";
 import { SearchIcon, } from "../../assets/icons";
 import { Todo, } from "../../data/todo.model";
-import { TodoInProgressScreenProps, } from "../../navigation/todo.navigator";
+import { TodoInProgressScreenProps, } from "../../navigation/TodoStack/todo.navigator";
 import {
 	Input,
 	Layout,

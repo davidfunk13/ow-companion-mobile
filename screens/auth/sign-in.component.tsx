@@ -1,7 +1,7 @@
 import { AppRoute, } from "../../navigation/app-routes";
 import { FormInput, } from "../../components/form-input.component";
 import React from "react";
-import { SignInScreenProps, } from "../../navigation/auth.navigator";
+import { SignInScreenProps, } from "../../navigation/AuthStack/AuthStack";
 import { TouchableWithoutFeedback, } from "react-native-gesture-handler";
 import { Button, CheckBox, Layout, } from "@ui-kitten/components";
 import { EyeIcon, EyeOffIcon, } from "../../assets/icons";

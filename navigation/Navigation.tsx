@@ -1,6 +1,6 @@
 import { AppRoute, } from "./app-routes";
-import { AuthNavigator, } from "./auth.navigator";
-import { HomeNavigator, } from "./home.navigator";
+import { AuthNavigator, } from "./AuthStack/AuthStack";
+import { HomeNavigator, } from "./AppStack/AppStack";
 import React from "react";
 import { createStackNavigator, } from "@react-navigation/stack";
 
@@ -18,6 +18,7 @@ export const AppNavigator = (props: Partial<StackNavigatorProps>): React.ReactEl
 		screenOptions={{ headerShown: false, }}
 	>
 		<Stack.Screen name={AppRoute.AUTH} component={AuthNavigator}/>
+		{/* //HOME WILL BECOME APP FOR APPSTACK */}
 		<Stack.Screen name={AppRoute.HOME} component={HomeNavigator}/>
 	</Stack.Navigator>
 );

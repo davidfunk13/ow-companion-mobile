@@ -1,6 +1,6 @@
 import { AppRoute, } from "../../navigation/app-routes";
 import React from "react";
-import { TodoScreenProps, } from "../../navigation/todo.navigator";
+import { TodoScreenProps, } from "../../navigation/TodoStack/todo.navigator";
 import { Toolbar, } from "../../components/toolbar.component";
 import { Divider, MenuItem, Tab, TabBar, TabElement, } from "@ui-kitten/components";
 import { InfoIcon, LogoutIcon, MenuIcon, } from "../../assets/icons";

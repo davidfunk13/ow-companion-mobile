@@ -1,4 +1,4 @@
-import { HomeScreenProps, } from "../../navigation/home.navigator";
+import { HomeScreenProps, } from "../../navigation/AppStack/AppStack";
 import React from "react";
 import { StyleSheet, } from "react-native";
 import { Toolbar, } from "../../components/toolbar.component";
@@ -10,13 +10,13 @@ export const HomeScreen = (props: HomeScreenProps): SafeAreaLayoutElement => (
 		style={styles.safeArea}
 		insets={SaveAreaInset.TOP}>
 		<Toolbar
-			title={"HOME"}
+			title={"DASHBOARD"}
 			onBackPress={props.navigation.goBack}
 		/>
 		<Divider />
 		<Layout style={styles.container}>
 			<Text category={"h1"}>
-				HOME
+				Dashboard
 			</Text>
 		</Layout>
 	</SafeAreaLayout>

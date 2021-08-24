@@ -1,8 +1,8 @@
-import { AppRoute, } from "./app-routes";
-import { ProfileNavigator, } from "./profile.navigator";
+import { AppRoute, } from "../app-routes";
+import { ProfileNavigator, } from "../ProfileStack/profile.navigator";
 import React from "react";
-import { TodoNavigator, } from "./todo.navigator";
-import { AboutScreen, HomeDrawer, HomeTabBar, } from "../screens/home";
+import { TodoNavigator, } from "../TodoStack/todo.navigator";
+import { AboutScreen, HomeDrawer, HomeTabBar, } from "../../screens/home";
 import {
 	BottomTabBarProps,
 	BottomTabNavigationProp,
@@ -14,11 +14,11 @@ import {
 	DrawerNavigationProp,
 	createDrawerNavigator,
 } from "@react-navigation/drawer";
-import { HomeIcon, InfoIcon, LayoutIcon, PersonIcon, } from "../assets/icons";
-import { HomeScreen, } from "../screens/home/home";
+import { HomeIcon, InfoIcon, LayoutIcon, PersonIcon, } from "../../assets/icons";
+import { HomeScreen, } from "../../screens/home/home";
 
 type HomeDrawerNavigatorParams = {
-  [AppRoute.HOME]: undefined;
+  [AppRoute.DASHBOARD]: undefined;
   [AppRoute.ABOUT]: undefined;
 }
 
@@ -29,11 +29,11 @@ type HomeBottomTabsNavigatorParams = {
 
 export type TodoTabNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<HomeBottomTabsNavigatorParams, AppRoute.TODO>,
-  DrawerNavigationProp<HomeDrawerNavigatorParams, AppRoute.HOME>>;
+  DrawerNavigationProp<HomeDrawerNavigatorParams, AppRoute.DASHBOARD>>;
 
 export type ProfileTabNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<HomeBottomTabsNavigatorParams, AppRoute.PROFILE>,
-  DrawerNavigationProp<HomeDrawerNavigatorParams, AppRoute.HOME>>;
+  DrawerNavigationProp<HomeDrawerNavigatorParams, AppRoute.DASHBOARD>>;
 
 export interface AboutScreenProps {
   navigation: DrawerNavigationProp<HomeDrawerNavigatorParams, AppRoute.ABOUT>;
@@ -50,7 +50,7 @@ export type BottomHomeScreenProps = BottomTabBarProps & {
 };
 
 export type DrawerHomeScreenProps = DrawerContentComponentProps & {
-  navigation: DrawerNavigationProp<HomeDrawerNavigatorParams, AppRoute.HOME>;
+  navigation: DrawerNavigationProp<HomeDrawerNavigatorParams, AppRoute.DASHBOARD>;
 };
 
 const Drawer = createDrawerNavigator<HomeDrawerNavigatorParams>();
@@ -95,10 +95,10 @@ export const HomeNavigator = (): React.ReactElement => (
 	// @ts-ignore: `drawerContent` also contains a DrawerNavigationProp
 	<Drawer.Navigator drawerContent={HomeDrawer}>
 		<Drawer.Screen
-			name={AppRoute.HOME}
+			name={AppRoute.DASHBOARD}
 			component={HomeScreen}
 			options={{
-				title:      "Home",
+				title:      "Dashboard",
 				drawerIcon: HomeIcon, 
 			}}
 		/>

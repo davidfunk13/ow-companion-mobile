@@ -1,6 +1,6 @@
-import { AppRoute, } from "./app-routes";
-import { ProfileScreen, } from "../screens/profile";
-import { ProfileTabNavigationProp, } from "./home.navigator";
+import { AppRoute, } from "../app-routes";
+import { ProfileScreen, } from "../../screens/profile";
+import { ProfileTabNavigationProp, } from "../AppStack/AppStack";
 import React from "react";
 import { CompositeNavigationProp, RouteProp, } from "@react-navigation/core";
 import { StackNavigationProp, createStackNavigator, } from "@react-navigation/stack";

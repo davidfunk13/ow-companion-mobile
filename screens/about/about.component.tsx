@@ -1,4 +1,4 @@
-import { AboutScreenProps, } from "../../navigation/home.navigator";
+import { AboutScreenProps, } from "../../navigation/AppStack/AppStack";
 import React from "react";
 import { StyleSheet, } from "react-native";
 import { Toolbar, } from "../../components/toolbar.component";
@@ -11,13 +11,13 @@ export const AboutScreen = (props: AboutScreenProps): SafeAreaLayoutElement => (
 		insets={SaveAreaInset.TOP}>
 		<Toolbar
 			menu={() => <></>}
-			title={"React Navigation Ex 🐱"}
+			title={"Aboot"}
 			onBackPress={props.navigation.goBack}
 		/>
-		<Divider/>
+		<Divider />
 		<Layout style={styles.container}>
 			<Text category={"h1"}>
-        ABOUT
+				ABOUT
 			</Text>
 		</Layout>
 	</SafeAreaLayout>

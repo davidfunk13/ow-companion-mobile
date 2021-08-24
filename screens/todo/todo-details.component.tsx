@@ -2,7 +2,7 @@ import { ImageOverlay, } from "../../components/image-overlay.component";
 import { ProgressBar, } from "../../components/progress-bar.component";
 import React from "react";
 import { Todo, } from "../../data/todo.model";
-import { TodoDetailsScreenProps, } from "../../navigation/todo.navigator";
+import { TodoDetailsScreenProps, } from "../../navigation/TodoStack/todo.navigator";
 import { Toolbar, } from "../../components/toolbar.component";
 import { Button, Layout, LayoutElement, Text, } from "@ui-kitten/components";
 import { EdgeInsets, useSafeArea, } from "react-native-safe-area-context";

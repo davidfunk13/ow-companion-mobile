@@ -1,4 +1,4 @@
-import { DrawerHomeScreenProps, } from "../../navigation/home.navigator";
+import { DrawerHomeScreenProps, } from "../../navigation/AppStack/AppStack";
 import React from "react";
 import { RenderProp, } from "@ui-kitten/components/devsupport";
 import { Drawer, DrawerElement, DrawerItem, DrawerItemElement, IndexPath, TextProps, } from "@ui-kitten/components";

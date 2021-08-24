@@ -1,5 +1,5 @@
 import { MenuIcon, } from "../../assets/icons";
-import { ProfileScreenProps, } from "../../navigation/profile.navigator";
+import { ProfileScreenProps, } from "../../navigation/ProfileStack/profile.navigator";
 import React from "react";
 import { StyleSheet, } from "react-native";
 import { Toolbar, } from "../../components/toolbar.component";

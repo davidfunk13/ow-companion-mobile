@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, } from "react-native";
 import { Button, Layout, LayoutElement, Text, } from "@ui-kitten/components";
-import { TodoDoneScreenProps, } from "../../navigation/todo.navigator";
+import { TodoDoneScreenProps, } from "../../navigation/TodoStack/todo.navigator";
 
 export const TodoDoneScreen = (props: TodoDoneScreenProps): LayoutElement => (
 	<Layout style={styles.container}>

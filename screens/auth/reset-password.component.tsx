@@ -1,7 +1,7 @@
 import { AppRoute, } from "../../navigation/app-routes";
 import { FormInput, } from "../../components/form-input.component";
 import React from "react";
-import { ResetPasswordScreenProps, } from "../../navigation/auth.navigator";
+import { ResetPasswordScreenProps, } from "../../navigation/AuthStack/AuthStack";
 import { Toolbar, } from "../../components/toolbar.component";
 import { Button, Layout, LayoutElement, } from "@ui-kitten/components";
 import { EdgeInsets, useSafeArea, } from "react-native-safe-area-context";

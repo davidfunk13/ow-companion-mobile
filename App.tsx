@@ -1,4 +1,4 @@
-import { AppNavigator, } from "./navigation/app.navigator";
+import { AppNavigator, } from "./navigation/Navigation";
 import { AppRoute, } from "./navigation/app-routes";
 import { EvaIconsPack, } from "@ui-kitten/eva-icons";
 import { NavigationContainer, } from "@react-navigation/native";

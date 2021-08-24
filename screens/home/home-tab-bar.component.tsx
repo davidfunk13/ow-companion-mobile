@@ -1,4 +1,4 @@
-import { BottomHomeScreenProps, } from "../../navigation/home.navigator";
+import { BottomHomeScreenProps, } from "../../navigation/AppStack/AppStack";
 import React from "react";
 import {
 	BottomNavigation,
