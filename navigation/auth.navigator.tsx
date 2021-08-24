@@ -29,7 +29,7 @@ export interface ResetPasswordScreenProps {
 const Stack = createStackNavigator<AuthNavigatorParams>();
 
 export const AuthNavigator = (): React.ReactElement => (
-	<Stack.Navigator screenOptions={{ headerShown: true, }}>
+	<Stack.Navigator screenOptions={{ headerShown: false, }}>
 		<Stack.Screen name={AppRoute.SIGN_IN} component={SignInScreen} />
 		<Stack.Screen name={AppRoute.SIGN_UP} component={SignUpScreen} />
 		<Stack.Screen name={AppRoute.RESET_PASSWORD} component={ResetPasswordScreen} />

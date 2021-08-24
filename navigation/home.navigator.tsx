@@ -15,6 +15,7 @@ import {
 	createDrawerNavigator,
 } from "@react-navigation/drawer";
 import { HomeIcon, InfoIcon, LayoutIcon, PersonIcon, } from "../assets/icons";
+import { HomeScreen, } from "../screens/home/home";
 
 type HomeDrawerNavigatorParams = {
   [AppRoute.HOME]: undefined;
@@ -35,6 +36,11 @@ export type ProfileTabNavigationProp = CompositeNavigationProp<
   DrawerNavigationProp<HomeDrawerNavigatorParams, AppRoute.HOME>>;
 
 export interface AboutScreenProps {
+  navigation: DrawerNavigationProp<HomeDrawerNavigatorParams, AppRoute.ABOUT>;
+  route: RouteProp<HomeDrawerNavigatorParams, AppRoute.ABOUT>;
+}
+
+export interface HomeScreenProps {
   navigation: DrawerNavigationProp<HomeDrawerNavigatorParams, AppRoute.ABOUT>;
   route: RouteProp<HomeDrawerNavigatorParams, AppRoute.ABOUT>;
 }
@@ -61,28 +67,28 @@ const BottomTab = createBottomTabNavigator<HomeBottomTabsNavigatorParams>();
 // rather than hard-coding business logic in navigators
 // like it is described in https://reactnavigation.org/docs/en/next/auth-flow.html
 
-const HomeBottomNavigator = (): React.ReactElement => (
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore: `tabBar` also contains a DrawerNavigationProp
-	<BottomTab.Navigator tabBar={HomeTabBar}>
-		<BottomTab.Screen
-			name={AppRoute.TODO}
-			component={TodoNavigator}
-			options={{
-				title:      "TODO",
-				tabBarIcon: LayoutIcon, 
-			}}
-		/>
-		<BottomTab.Screen
-			name={AppRoute.PROFILE}
-			component={ProfileNavigator}
-			options={{
-				title:      "PROFILE",
-				tabBarIcon: PersonIcon, 
-			}}
-		/>
-	</BottomTab.Navigator>
-);
+// const HomeBottomNavigator = (): React.ReactElement => (
+// 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// 	// @ts-ignore: `tabBar` also contains a DrawerNavigationProp
+// 	<BottomTab.Navigator tabBar={HomeTabBar}>
+// 		<BottomTab.Screen
+// 			name={AppRoute.TODO}
+// 			component={TodoNavigator}
+// 			options={{
+// 				title:      "TODO",
+// 				tabBarIcon: LayoutIcon, 
+// 			}}
+// 		/>
+// 		<BottomTab.Screen
+// 			name={AppRoute.PROFILE}
+// 			component={ProfileNavigator}
+// 			options={{
+// 				title:      "PROFILE",
+// 				tabBarIcon: PersonIcon, 
+// 			}}
+// 		/>
+// 	</BottomTab.Navigator>
+// );
 
 export const HomeNavigator = (): React.ReactElement => (
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -90,7 +96,7 @@ export const HomeNavigator = (): React.ReactElement => (
 	<Drawer.Navigator drawerContent={HomeDrawer}>
 		<Drawer.Screen
 			name={AppRoute.HOME}
-			component={HomeBottomNavigator}
+			component={HomeScreen}
 			options={{
 				title:      "Home",
 				drawerIcon: HomeIcon, 

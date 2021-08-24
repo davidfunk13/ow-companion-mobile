@@ -11,7 +11,7 @@ import {
 } from "@ui-kitten/components";
 
 export interface ToolbarProps extends TopNavigationProps {
-  menu: () => React.ReactElement;
+  menu?: () => React.ReactElement;
   backIcon?: (style: StyleType) => React.ReactElement<ImageProps>;
   menuIcon?: (style: StyleType) => React.ReactElement<ImageProps>;
   onBackPress?: () => void;
@@ -47,7 +47,7 @@ export const Toolbar = (props: ToolbarProps): TopNavigationActionElement => {
 			placement={"bottom end"}
 			onSelect={onMenuSelect}
 			onBackdropPress={onMenuActionPress}>
-			{menu()}
+			{menu && menu()}
 		</OverflowMenu>
 	);
 
@@ -63,7 +63,7 @@ export const Toolbar = (props: ToolbarProps): TopNavigationActionElement => {
 			{...topNavigationProps}
 			alignment={"center"}
 			accessoryLeft={onBackPress && renderBackAction}
-			accessoryRight={menu() && renderMenuAction}
+			accessoryRight={menu && menu() && renderMenuAction}
 		/>
 	);
 };

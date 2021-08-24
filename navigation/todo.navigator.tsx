@@ -83,7 +83,7 @@ const TodoTabsNavigator = (): React.ReactElement => (
 );
 
 export const TodoNavigator = (): React.ReactElement => (
-	<Stack.Navigator screenOptions={{ headerShown: true, }}>
+	<Stack.Navigator screenOptions={{ headerShown: false, }}>
 		<Stack.Screen name={AppRoute.TODO} component={TodoTabsNavigator}/>
 		<Stack.Screen name={AppRoute.TODO_DETAILS} component={TodoDetailsScreen}/>
 	</Stack.Navigator>

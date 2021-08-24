@@ -19,7 +19,9 @@ const App = () => {
 				theme={light}>
 				<SafeAreaProvider>
 					<NavigationContainer>
-						<AppNavigator initialRouteName={isAuthorized ? AppRoute.HOME : AppRoute.AUTH} />
+						<AppNavigator 
+							initialRouteName={isAuthorized ? AppRoute.HOME : AppRoute.AUTH} 
+						/>
 					</NavigationContainer>
 				</SafeAreaProvider>
 			</ApplicationProvider>

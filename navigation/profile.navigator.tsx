@@ -19,7 +19,7 @@ export interface ProfileScreenProps {
 const Stack = createStackNavigator<ProfileNavigatorParams>();
 
 export const ProfileNavigator = (): React.ReactElement => (
-	<Stack.Navigator screenOptions={{ headerShown: true, }}>
+	<Stack.Navigator screenOptions={{ headerShown: false, }}>
 		<Stack.Screen name={AppRoute.PROFILE} component={ProfileScreen}/>
 	</Stack.Navigator>
 );

@@ -15,7 +15,7 @@ const Stack = createStackNavigator<AppNavigatorParams>();
 
 export const AppNavigator = (props: Partial<StackNavigatorProps>): React.ReactElement => (
 	<Stack.Navigator {...props}
-		screenOptions={{ headerShown: true, }}
+		screenOptions={{ headerShown: false, }}
 	>
 		<Stack.Screen name={AppRoute.AUTH} component={AuthNavigator}/>
 		<Stack.Screen name={AppRoute.HOME} component={HomeNavigator}/>
