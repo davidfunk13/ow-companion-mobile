@@ -1,18 +1,24 @@
 import React from "react";
-import { SafeAreaView, } from "react-native";
-import { Button, Divider, Layout, TopNavigation, } from "@ui-kitten/components";
+import { TestComponent, } from "../../components/TestComponent/TestComponent";
+import { selectStatus, } from "../../redux/reducers/test/testSlice";
+import { useAppSelector, } from "../../redux/hooks";
+import { Divider, Layout, TopNavigation, } from "@ui-kitten/components";
+import { Button, SafeAreaView, Text, } from "react-native";
 
 interface IHomeScreenProps {
     navigation: any
 }
 
 const HomeScreen = ({ navigation, }: IHomeScreenProps) => {
+	const isLoading = useAppSelector(selectStatus);
+
 	const navigateDetails = () => {
 		navigation.navigate("Details");
 	};
-
+	
 	return (
 		<SafeAreaView style={{ flex: 1, }}>
+
 			<TopNavigation title={"MyApp"} alignment={"center"}/>
 			<Divider/>
 			<Layout style={{
@@ -20,7 +26,9 @@ const HomeScreen = ({ navigation, }: IHomeScreenProps) => {
 				justifyContent: "center",
 				alignItems:     "center", 
 			}}>
-				<Button onPress={navigateDetails}>OPEN DETAILS</Button>
+				<Button title={"Open Details"} onPress={navigateDetails}>Open Details</Button>
+				<Text>{isLoading}</Text>
+				<TestComponent/>
 			</Layout>
 		</SafeAreaView>
 	);
