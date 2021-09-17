@@ -24,4 +24,5 @@ const AppContent: FC<IAppContentProps> = () => {
 	);
 };
 
-export default AppContent;
+export default AppContent
+;

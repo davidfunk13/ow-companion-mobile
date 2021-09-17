@@ -10,7 +10,6 @@ interface IAppProps {
 }
 
 const App: FC<IAppProps> = () => {
-	
 	return (
 		<>
 			<IconRegistry icons={EvaIconsPack} />
