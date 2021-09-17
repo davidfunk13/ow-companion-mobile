@@ -4,6 +4,7 @@ import { selectStatus, } from "../../redux/reducers/test/testSlice";
 import { useAppSelector, } from "../../redux/hooks";
 import { Divider, Layout, TopNavigation, } from "@ui-kitten/components";
 import { Button, SafeAreaView, Text, } from "react-native";
+import { MonoText } from "../../components/StyledText";
 
 interface IHomeScreenProps {
     navigation: any

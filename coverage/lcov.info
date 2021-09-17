@@ -1,5 +1,5 @@
 TN:
-SF:components\StyledText.tsx
+SF:components/StyledText.tsx
 FN:5,MonoText
 FNF:1
 FNH:1
@@ -11,7 +11,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Themed.tsx
+SF:components/Themed.tsx
 FN:12,useThemeColor
 FN:34,Text
 FN:41,View
@@ -39,7 +39,7 @@ BRF:2
 BRH:1
 end_of_record
 TN:
-SF:components\ExampleComponent\ExampleComponent.tsx
+SF:components/ExampleComponent/ExampleComponent.tsx
 FN:8,(anonymous_0)
 FN:19,(anonymous_1)
 FN:22,(anonymous_2)
@@ -62,7 +62,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:constants\Colors.ts
+SF:constants/Colors.ts
 FNF:0
 FNH:0
 DA:1,1
@@ -73,7 +73,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:hooks\useColorScheme.ts
+SF:hooks/useColorScheme.ts
 FN:6,useColorScheme
 FNF:1
 FNH:1
@@ -85,7 +85,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:redux\mockApi.ts
+SF:redux/mockApi.ts
 FN:2,fetchCount
 FN:3,(anonymous_1)
 FN:3,(anonymous_2)
@@ -102,7 +102,7 @@ BRF:1
 BRH:0
 end_of_record
 TN:
-SF:redux\reducers\test\testSlice.ts
+SF:redux/reducers/test/testSlice.ts
 FN:22,(anonymous_0)
 FN:35,(anonymous_1)
 FN:42,(anonymous_2)
