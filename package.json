@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest",
-    "test-coverage": "jest --coverage",
+    "cov": "jest --coverage",
     "eject": "expo eject"
   },
   "jest": {

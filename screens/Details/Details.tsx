@@ -3,7 +3,7 @@ import { SafeAreaView, } from "react-native";
 import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, } from "@ui-kitten/components";
 
 interface IDetailsScreenProps {
-    navigation: any
+	navigation: any
 }
 
 const DetailsScreen = ({ navigation, }: IDetailsScreenProps) => {

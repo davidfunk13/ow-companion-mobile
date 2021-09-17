@@ -2,18 +2,24 @@ import * as eva from "@eva-design/eva";
 import AppNavigator from "./navigation/AppNavigator/AppNavigator";
 import { EvaIconsPack, } from "@ui-kitten/eva-icons";
 import { Provider, } from "react-redux";
-import React from "react";
 import { store, } from "./redux/store";
 import { ApplicationProvider, IconRegistry, } from "@ui-kitten/components";
+import React, { FC, } from "react";
 
-const App = () => {
+interface IAppProps {
+
+}
+
+const App: FC<IAppProps> = () => {
 	return (
-		<Provider store={store}>
-			<IconRegistry icons={EvaIconsPack}/>
-			<ApplicationProvider {...eva} theme={eva.light}>
-				<AppNavigator/>
-			</ApplicationProvider>
-		</Provider>
+		<>
+			<IconRegistry icons={EvaIconsPack} />
+			<Provider store={store}>
+				<ApplicationProvider {...eva} theme={eva.dark}>
+					<AppNavigator />
+				</ApplicationProvider>
+			</Provider>
+		</>
 	);
 };
 

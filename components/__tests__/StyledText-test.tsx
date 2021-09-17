@@ -1,4 +1,4 @@
-import { MonoText, } from "../StyledText";
+import { MonoText, } from "../Examples/StyledText";
 import React from "react";
 import renderer from "react-test-renderer";
 
