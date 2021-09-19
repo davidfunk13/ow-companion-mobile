@@ -15,14 +15,12 @@
     "snapshotResolver": "./__snapshots__/snapshotResolver.js"
   },
   "dependencies": {
-    "@eva-design/eva": "^2.1.1",
+    "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/drawer": "^6.1.4",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
     "@react-navigation/stack": "^6.0.7",
     "@reduxjs/toolkit": "^1.6.1",
-    "@ui-kitten/components": "^5.1.1",
-    "@ui-kitten/eva-icons": "^5.1.1",
     "expo": "~42.0.1",
     "expo-splash-screen": "^0.11.4",
     "expo-status-bar": "~1.0.4",

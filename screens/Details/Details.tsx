@@ -1,6 +1,5 @@
 import React from "react";
 import { SafeAreaView, } from "react-native";
-import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, } from "@ui-kitten/components";
 
 interface IDetailsScreenProps {
 	navigation: any
@@ -11,13 +10,13 @@ const DetailsScreen = ({ navigation, }: IDetailsScreenProps) => {
 		navigation.goBack();
 	};
 
-	const BackAction = () => (
-		<TopNavigationAction icon={(props) => <Icon {...props} name={"arrow-back"} />} onPress={navigateBack} />
-	);
+	// const BackAction = () => (
+	// 	<TopNavigationAction icon={(props) => <Icon {...props} name={"arrow-back"} />} onPress={navigateBack} />
+	// );
 
 	return (
 		<SafeAreaView style={{ flex: 1, }}>
-			<TopNavigation title={"MyApp"} alignment={"center"} accessoryLeft={BackAction} />
+			{/* <TopNavigation title={"MyApp"} alignment={"center"} accessoryLeft={BackAction} />
 			<Divider />
 			<Layout style={{
 				flex:           1,
@@ -25,7 +24,7 @@ const DetailsScreen = ({ navigation, }: IDetailsScreenProps) => {
 				alignItems:     "center",
 			}}>
 				<Text category={"h1"}>DETAILS</Text>
-			</Layout>
+			</Layout> */}
 		</SafeAreaView>
 	);
 };
