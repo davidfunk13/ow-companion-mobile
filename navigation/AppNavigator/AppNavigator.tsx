@@ -1,6 +1,6 @@
 
 import DetailsScreen from "../../screens/Details/Details";
-import DrawerThemingShowcase from "../Drawer/Drawer";
+import DrawerThemingShowcase from "../../components/ui/Drawer/Drawer";
 import HomeScreen from "../../screens/Home/Home";
 import { NavigationContainer, } from "@react-navigation/native";
 import React from "react";

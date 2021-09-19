@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1631854320219" clover="3.2.0">
-  <project timestamp="1631854320219" name="All files">
+<coverage generated="1632010263651" clover="3.2.0">
+  <project timestamp="1632010263652" name="All files">
     <metrics statements="46" coveredstatements="33" conditionals="7" coveredconditionals="3" methods="24" coveredmethods="12" elements="77" coveredelements="48" complexity="0" loc="46" ncloc="46" packages="7" files="8" classes="8"/>
     <package name="components.ExampleComponent">
       <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
-      <file name="ExampleComponent.tsx" path="/Users/davefunk/dev/ow-companion-mobile/components/ExampleComponent/ExampleComponent.tsx">
+      <file name="ExampleComponent.tsx" path="C:\Users\Dave\dev\projects\ow-companion-mobile\components\ExampleComponent\ExampleComponent.tsx">
         <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
         <line num="8" count="1" type="stmt"/>
         <line num="10" count="3" type="stmt"/>
@@ -16,11 +16,11 @@
     </package>
     <package name="components.Examples">
       <metrics statements="12" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="3"/>
-      <file name="StyledText.tsx" path="/Users/davefunk/dev/ow-companion-mobile/components/Examples/StyledText.tsx">
+      <file name="StyledText.tsx" path="C:\Users\Dave\dev\projects\ow-companion-mobile\components\Examples\StyledText.tsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="6" count="1" type="stmt"/>
       </file>
-      <file name="Themed.tsx" path="/Users/davefunk/dev/ow-companion-mobile/components/Examples/Themed.tsx">
+      <file name="Themed.tsx" path="C:\Users\Dave\dev\projects\ow-companion-mobile\components\Examples\Themed.tsx">
         <metrics statements="11" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="2"/>
         <line num="15" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
@@ -37,7 +37,7 @@
     </package>
     <package name="constants">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="Theme.ts" path="/Users/davefunk/dev/ow-companion-mobile/constants/Theme.ts">
+      <file name="Theme.ts" path="C:\Users\Dave\dev\projects\ow-companion-mobile\constants\Theme.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -45,21 +45,21 @@
     </package>
     <package name="hooks">
       <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="useColorScheme.ts" path="/Users/davefunk/dev/ow-companion-mobile/hooks/useColorScheme.ts">
+      <file name="useColorScheme.ts" path="C:\Users\Dave\dev\projects\ow-companion-mobile\hooks\useColorScheme.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="7" count="1" type="stmt"/>
       </file>
     </package>
     <package name="redux">
       <metrics statements="1" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="0"/>
-      <file name="mockApi.ts" path="/Users/davefunk/dev/ow-companion-mobile/redux/mockApi.ts">
+      <file name="mockApi.ts" path="C:\Users\Dave\dev\projects\ow-companion-mobile\redux\mockApi.ts">
         <metrics statements="1" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
     </package>
     <package name="redux.reducers.test">
       <metrics statements="19" coveredstatements="11" conditionals="2" coveredconditionals="0" methods="11" coveredmethods="4"/>
-      <file name="testSlice.ts" path="/Users/davefunk/dev/ow-companion-mobile/redux/reducers/test/testSlice.ts">
+      <file name="testSlice.ts" path="C:\Users\Dave\dev\projects\ow-companion-mobile\redux\reducers\test\testSlice.ts">
         <metrics statements="19" coveredstatements="11" conditionals="2" coveredconditionals="0" methods="11" coveredmethods="4"/>
         <line num="10" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
@@ -84,7 +84,7 @@
     </package>
     <package name="redux.reducers.theme">
       <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
-      <file name="themeSlice.ts" path="/Users/davefunk/dev/ow-companion-mobile/redux/reducers/theme/themeSlice.ts">
+      <file name="themeSlice.ts" path="C:\Users\Dave\dev\projects\ow-companion-mobile\redux\reducers\theme\themeSlice.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="9" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>

@@ -2,7 +2,7 @@ import React from "react";
 import { TestComponent, } from "../../components/TestComponent/TestComponent";
 import { selectStatus, } from "../../redux/reducers/test/testSlice";
 import { useAppSelector, } from "../../redux/hooks";
-import { Button, SafeAreaView, Text, } from "react-native";
+import { Button, ImageBackground, SafeAreaView, Text, } from "react-native";
 import { Divider, Layout, TopNavigation, } from "@ui-kitten/components";
 
 interface IHomeScreenProps {
@@ -18,7 +18,16 @@ const HomeScreen = ({ navigation, }: IHomeScreenProps) => {
 
 	return (
 		<SafeAreaView style={{ flex: 1, }}>
-
+			<ImageBackground source={require("../../assets/images/ow.jpg")} style={{
+				width:  "100%",
+				height: "100%" ,
+			}}
+			imageStyle={
+				{
+					resizeMode: "cover" ,
+					height:     "100%",
+				}
+			}/>
 			<TopNavigation title={"MyApp"} alignment={"center"} />
 			<Divider />
 			<Layout style={{
