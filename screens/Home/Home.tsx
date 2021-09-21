@@ -20,8 +20,7 @@ const HomeScreen = ({ navigation, }: IHomeScreenProps) => {
 		<AppScreen>
 			<Text>Loading: {isLoading}</Text>
 			<TestComponent />
-		</AppScreen>
-			
+		</AppScreen>	
 	);
 };
 
