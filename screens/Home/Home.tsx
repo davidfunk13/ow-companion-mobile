@@ -1,7 +1,7 @@
 import AppScreen from "../../components/AppScreen/AppScreen";
 import React from "react";
 import { TestComponent, } from "../../components/TestComponent/TestComponent";
-import { Text, } from "react-native";
+import { Text, } from "react-native-elements";
 import { selectStatus, } from "../../redux/reducers/test/testSlice";
 import { useAppSelector, } from "../../redux/hooks";
 
@@ -18,6 +18,7 @@ const HomeScreen = ({ navigation, }: IHomeScreenProps) => {
 
 	return (
 		<AppScreen>
+			<Text h1>Welcome</Text>
 			<Text>Loading: {isLoading}</Text>
 			<TestComponent />
 		</AppScreen>	
