@@ -1,5 +1,5 @@
-import Colors from "../../constants/Colors";
 import { StyleSheet, } from "react-native";
+import theme from "../../theme";
 
 const styles = StyleSheet.create({
 	container:       { flex: 1 , },
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems:    "center",
 	},
-	headerText:       { color: Colors.common.white, },
+	headerText:       { color: theme.palette.common.white, },
 	touchableOpacity: {
 		position:        "absolute",
 		right:           0,
