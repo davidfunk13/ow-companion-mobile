@@ -1,9 +1,10 @@
-import * as eva from "@eva-design/eva";
-import AppNavigator from "./navigation/AppNavigator/AppNavigator";
-import { EvaIconsPack, } from "@ui-kitten/eva-icons";
+
+import Navigation from "./navigation/Navigation";
 import { Provider, } from "react-redux";
+import { SafeAreaProviderCompat, } from "@react-navigation/elements";
+import { ThemeProvider, } from "react-native-elements";
 import { store, } from "./redux/store";
-import { ApplicationProvider, IconRegistry, } from "@ui-kitten/components";
+import theme from "./constants/ElementsTheme";
 import React, { FC, } from "react";
 
 interface IAppProps {
@@ -11,16 +12,17 @@ interface IAppProps {
 }
 
 const App: FC<IAppProps> = () => {
+
 	return (
-		<>
-			<IconRegistry icons={EvaIconsPack} />
+		<SafeAreaProviderCompat>
 			<Provider store={store}>
-				<ApplicationProvider {...eva} theme={eva.dark}>
-					<AppNavigator />
-				</ApplicationProvider>
-			</Provider>
-		</>
+				<ThemeProvider theme={theme}>
+					<Navigation />
+				</ThemeProvider>
+			</Provider>	
+		</SafeAreaProviderCompat>
 	);
 };
 
 export default App;
+
