@@ -1,88 +1,53 @@
 import AppScreen from "../../components/AppScreen/AppScreen";
-import React from "react";
-import { TestComponent, } from "../../components/TestComponent/TestComponent";
-import { Input, Text , } from "react-native-elements";
-import { selectStatus, } from "../../redux/reducers/test/testSlice";
-import { useAppSelector, } from "../../redux/hooks";
-import { Button, NativeSyntheticEvent, NativeTouchEvent, TextInput, View, } from "react-native";
+import BattletagSearchInput from "../../models/Inputs/BattletagSearchInput/BattletagSearchInput";
 import { Formik, } from "formik";
-import { TouchableOpacity, } from "react-native-gesture-handler";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { useState, } from "react";
+import Icon from "react-native-vector-icons/AntDesign";
+import { NavigationProp, } from "@react-navigation/core";
+import React from "react";
+import { View, } from "react-native";
+import styles from "./AddBattletag.styles";
+import validationSchema from "./validationSchema";
+import { Button, Input, Text, } from "react-native-elements";
 
 interface IAddBattletagScreenProps {
-	navigation: any
+	navigation?: NavigationProp<never, never>
 }
 
-const AddBattletagScreen = ({ navigation, }: IAddBattletagScreenProps) => {
-	const isLoading = useAppSelector(selectStatus);
+const initialValues: BattletagSearchInput = { battletag: "", };
 
-	const [ state, setState , ] = useState<any>();
-	// const navigateDetails = () => {
-	// 	navigation.navigate("Details");
-	// };
-
+const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 	return (
 		<AppScreen>
-			<Text h1>Add Battletag</Text>
+			<Text h1 style={styles.headingPadding}>Add Battletag</Text>
+			<Text>Add a new battletag to your app to track.</Text>
 			<Formik
-				initialValues={{ email: "", }}
-				onSubmit={values => console.log({
-					values,
-					message: "fuuuuuuucck you." ,
-				})}
+				validateOnBlur={false}
+				validateOnMount={false}
+				validateOnChange={false}
+				validationSchema={validationSchema}
+				initialValues={initialValues}
+				onSubmit={values => console.log(values)}
 			>
-				{({ handleChange, handleBlur, handleSubmit, values, }) => (
-					<View>
-						{/* <TouchableOpacity style={{ height: 40 , }}> */}
-						<TextInput
-							onChangeText={handleChange("email")}
-							onBlur={handleBlur("email")}
-							value={values.email}
-						/>
-						{/* </TouchableOpacity> */}
+				{({ handleChange, handleBlur, handleSubmit, values, errors, }) => (
+					<>
 						<Input
-							placeholder={"BASIC INPUT"}
-						/>
-
-						<Input
-							placeholder={"INPUT WITH ICON"}
-							leftIcon={{
-								type: "font-awesome",
-								name: "chevron-left", 
-							}}
-						/>
-
-						<Input
+							renderErrorMessage
+							onChangeText={handleChange("battletag")}
+							onBlur={handleBlur("battletag")}
+							value={values.battletag}
+							errorMessage={errors.battletag}
 							placeholder={"Search for Battletag."}
 							leftIcon={
 								<Icon
-									name={"user"}
-									size={16}
+									style={styles.searchIcon}
+									name={"search1"}
+									size={24}
 									color={"grey"}
 								/>
 							}
 						/>
-
-						<Input
-							placeholder={"Comment"}
-							leftIcon={{
-								type: "font-awesome",
-								name: "comment", 
-							}}
-							// style={styles}
-							onChangeText={value => setState({ comment: value, })}
-						/>
-
-						<Input
-							placeholder={"INPUT WITH ERROR MESSAGE"}
-							errorStyle={{ color: "red", }}
-							errorMessage={"ENTER A VALID ERROR HERE"}
-						/>
-
-						<Input placeholder={"Password"} secureTextEntry={true} />
-						<Button onPress={() => handleSubmit()} title={"Submit"} />
-					</View>
+						<Button title={"Submit"} onPress={() => handleSubmit()}/>
+					</>
 				)}
 			</Formik>
 		</AppScreen>

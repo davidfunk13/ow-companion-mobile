@@ -14,7 +14,8 @@ const Navigation = () => (
 	<NavigationContainer >
 		<Navigator initialRouteName={"Home"}
 			drawerContent={props => <AppDrawer {...props} />}
-			screenOptions={{ headerShown: true, }}>
+			screenOptions={{ headerShown: true, }}
+		>
 			<Screen name={"Home"} component={HomeScreen} />
 			<Screen name={"Details"} component={DetailsScreen} />
 			<Screen name={"Add Battletag"} component={AddBattletagScreen} />
