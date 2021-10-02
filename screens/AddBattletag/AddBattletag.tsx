@@ -2,16 +2,15 @@ import AppScreen from "../../components/AppScreen/AppScreen";
 import BattletagSearchInput from "../../models/Inputs/BattletagSearchInput";
 import { Formik, } from "formik";
 import Icon from "react-native-vector-icons/AntDesign";
-import { NavigationProp, } from "@react-navigation/core";
-import { View, } from "react-native";
 import battletagSearch from "../../redux/thunks/battletagSearch/battletagSearchThunk";
 import styles from "./AddBattletag.styles";
 import validationSchema from "./validationSchema";
 import { Button, Input, Text, } from "react-native-elements";
-import React, { useEffect , } from "react";
-import { selectBattletagSearchBattletags, selectBattletagSearchError, selectBattletagSearchLoading, } from "../../redux/reducers/battletagSearchSlice/battletagSearch";
+import { NavigationProp, useFocusEffect, } from "@react-navigation/core";
+import React, { useCallback, } from "react";
+import { ScrollView, View, } from "react-native";
+import { resetBattletagSearchSlice, selectBattletagSearchBattletags, selectBattletagSearchError, selectBattletagSearchLoading, } from "../../redux/reducers/battletagSearchSlice/battletagSearch";
 import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
-import theme from "../../theme";
 
 interface IAddBattletagScreenProps {
 	navigation?: NavigationProp<never, never>
@@ -27,12 +26,23 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 	const searchError = useAppSelector(selectBattletagSearchError);
 
 	const battletags = useAppSelector(selectBattletagSearchBattletags);
+
+	useFocusEffect(
+		useCallback(() => {
+			return () => {
+				dispatch(resetBattletagSearchSlice());
+			};
+		}, [])
+	);
 	
 	return (
 		<AppScreen>
-			<Text h1 style={styles.headingPadding}>Add Battletag</Text>
-			<Text>Add a new battletag to your app to track.</Text>
-			{searchError && <Text style={styles.errorText}>{searchError}</Text>}
+			<Text h1 style={styles.elementPadding}>Add Battletag</Text>
+			<Text style={styles.elementPadding}>Add a new battletag to your app to track.</Text>
+			{!!searchError && <Text style={{
+				...styles.errorText,
+				...styles.elementPadding ,
+			}}>{searchError}</Text>}
 			<Formik
 				validateOnBlur={false}
 				validateOnMount={false}
@@ -60,16 +70,18 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 							}
 						/>
 
-						<Button loading={searchLoading} title={"Submit"} onPress={() => handleSubmit()}/>
+						<Button loading={searchLoading} title={"Submit"} onPress={() => handleSubmit()} />
 					</>
 				)}
 			</Formik>
-			{battletags.map(battletag => {
-				return	<View key={battletag.id} style={{ margin: 10 , }}>
-					<Text>{battletag.name}</Text>
-					<Text>{battletag.platform}</Text>
-				</View>;
-			})}
+			<ScrollView style={styles.scrollViewPadding}>
+				{battletags.map(battletag => {
+					return <View key={battletag.id} style={{ margin: 10, }}>
+						<Text>{battletag.name}</Text>
+						<Text>{battletag.platform}</Text>
+					</View>;
+				})}
+			</ScrollView>
 		</AppScreen>
 	);
 };

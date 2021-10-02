@@ -15,7 +15,7 @@ const battletagSearch = createAsyncThunk<Battletag[], string, { rejectValue: str
 
 		const data: Battletag[] = await response.json();
 		
-		if (!data) {
+		if (!data || !data.length) {
 			return rejectWithValue("No Battletags found. Please Try again.");
 		}
 
