@@ -1,7 +1,6 @@
+import AppScreen from "./AppScreen";
 import React from "react";
 import renderer from "react-test-renderer";
-
-import AppScreen from "./AppScreen";
 
 describe("<App />", () => {
 	it("renders correctly", () => {
