@@ -22,4 +22,5 @@ const spacing = {
 export default {
 	spacing,
 	palette,
+	fontColor: palette.common.black,
 };
