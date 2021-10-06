@@ -1,4 +1,4 @@
-import battletagSearchSlice from "./reducers/battletagSearchSlice/battletagSearch";
+import battletagSearchSlice from "./reducers/battletagSearchSlice/battletagSearchSlice";
 import { Action, ThunkAction, configureStore, } from "@reduxjs/toolkit";
 
 export const store = configureStore({ reducer: { battletagSearch: battletagSearchSlice, }, });

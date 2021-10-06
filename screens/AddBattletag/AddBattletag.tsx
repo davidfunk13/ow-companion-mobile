@@ -9,7 +9,12 @@ import { Button, Input, Text, } from "react-native-elements";
 import { NavigationProp, useFocusEffect, } from "@react-navigation/core";
 import React, { useCallback, } from "react";
 import { ScrollView, View, } from "react-native";
-import { resetBattletagSearchSlice, selectBattletagSearchBattletags, selectBattletagSearchError, selectBattletagSearchLoading, } from "../../redux/reducers/battletagSearchSlice/battletagSearch";
+import {
+	resetBattletagSearchSlice,
+	selectBattletagSearchBattletags,
+	selectBattletagSearchError,
+	selectBattletagSearchLoading,
+} from "../../redux/reducers/battletagSearchSlice/battletagSearchSlice";
 import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
 
 interface IAddBattletagScreenProps {
@@ -34,14 +39,14 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 			};
 		}, [])
 	);
-	
+
 	return (
 		<AppScreen>
 			<Text h1 style={styles.elementPadding}>Add Battletag</Text>
 			<Text style={styles.elementPadding}>Add a new battletag to your app to track.</Text>
 			{!!searchError && <Text style={{
 				...styles.errorText,
-				...styles.elementPadding ,
+				...styles.elementPadding,
 			}}>{searchError}</Text>}
 			<Formik
 				validateOnBlur={false}

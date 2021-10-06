@@ -1,25 +1,23 @@
 import Battletag from "../../../models/Battletag";
+import axios from "axios";
 import { createAsyncThunk, } from "@reduxjs/toolkit";
 
-const battletagSearch = createAsyncThunk<Battletag[], string, { rejectValue: string }>(
-	"battletagSearch/search", async (battletag, { rejectWithValue, }) => {
-		const apiString = "https://playoverwatch.com/en-us/search/account-by-name/";
+const battletagSearch = createAsyncThunk<Battletag[], string, { rejectValue: string }>("battletagSearch/search", async (battletag, { rejectWithValue, }) => {
+	const apiString = "https://playoverwatch.com/en-us/search/account-by-name/";
 
-		const uri = encodeURIComponent(battletag);
+	const uri = encodeURIComponent(battletag);
 
-		const response = await fetch(encodeURI(apiString + uri));
+	const response = await axios.get<Battletag[]>(encodeURI(apiString + uri));
 
-		if (response.status !== 200) {
-			return rejectWithValue(`Something went wrong. (${response.status})`);
-		}
-
-		const data: Battletag[] = await response.json();
+	if (response.status !== 200) {
+		return rejectWithValue(`Something went wrong. (${response.status})`);
+	}
 		
-		if (!data || !data.length) {
-			return rejectWithValue("No Battletags found. Please Try again.");
-		}
+	if (!response.data || !response.data.length) {
+		return rejectWithValue("No Battletags found. Please Try again.");
+	}
 
-		return data;
-	});
+	return response.data;
+});
 
 export default battletagSearch;

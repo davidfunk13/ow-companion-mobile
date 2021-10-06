@@ -1,7 +1,7 @@
 import Battletag from "../../../models/Battletag";
+import { RootState, } from "../../store";
 import battletagSearch from "../../thunks/battletagSearch/battletagSearchThunk";
 import { PayloadAction, createSlice, } from "@reduxjs/toolkit";
-import { RootState, } from "../../store";
 
 export interface IBattletagSearchSliceState {
 	loading: boolean
@@ -38,7 +38,8 @@ export const battletagSearchSlice = createSlice({
 				state.battletags = initialState.battletags;
 
 				state.error = action.payload as string;
-			}).addCase(battletagSearch.fulfilled, (state: IBattletagSearchSliceState, action: PayloadAction<Battletag[]>) => {
+			})
+			.addCase(battletagSearch.fulfilled, (state: IBattletagSearchSliceState, action: PayloadAction<Battletag[]>) => {
 				state.loading = false;
 
 				state.error = "";
@@ -52,6 +53,6 @@ export const selectBattletagSearchLoading = (state: RootState) => state.battleta
 export const selectBattletagSearchBattletags = (state: RootState) => state.battletagSearch.battletags;
 export const selectBattletagSearchError = (state: RootState) => state.battletagSearch.error;
 
-export const { resetBattletagSearchSlice , } = battletagSearchSlice.actions;
+export const { resetBattletagSearchSlice, } = battletagSearchSlice.actions;
 
 export default battletagSearchSlice.reducer;
