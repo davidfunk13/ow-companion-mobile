@@ -1,6 +1,22 @@
 import { AnyAction, } from "redux";
+import Battletag from "../../../models/Battletag";
+import { RootState, } from "../../store";
 import battletagSearch from "../../thunks/battletagSearch/battletagSearchThunk";
-import reducer, { IBattletagSearchSliceState, resetBattletagSearchSlice, } from "./battletagSearchSlice";
+import battletagSearchSlice, { selectBattletagSearchBattletags, selectBattletagSearchError, } from "./battletagSearchSlice";
+import reducer, { IBattletagSearchSliceState, resetBattletagSearchSlice, selectBattletagSearchLoading, } from "./battletagSearchSlice";
+
+const mockBattletagArray: Battletag[] = [
+	{
+		id:          2,
+		name:        "Dave",
+		urlName:     "Dave#42069",
+		level:       420,
+		portrait:    "XXXXXXXXXXXXX",
+		platform:    "nintendo-switch",
+		playerLevel: 352342,
+		isPublic:    false, 
+	} , 
+];
 
 describe("battletagSearchSlice", () => {
 	const initialState: IBattletagSearchSliceState = {
@@ -33,11 +49,10 @@ describe("battletagSearchSlice", () => {
 		});
 	
 		it("sets state correctly when battletagSearchThunk is fulfilled", () => {
-			const mockBattletags = [ { id: 1 , }, { id: 2 , } , ];
 	
 			const action = {
 				type:    battletagSearch.fulfilled,
-				payload: mockBattletags, 
+				payload: mockBattletagArray, 
 			};
 	
 			const state = reducer(initialState, action);
@@ -45,7 +60,7 @@ describe("battletagSearchSlice", () => {
 			const mockState = {
 				loading:    false,
 				error:      "",
-				battletags: mockBattletags ,
+				battletags: mockBattletagArray ,
 			};
 	
 			expect(state).toEqual(mockState);
@@ -70,4 +85,25 @@ describe("battletagSearchSlice", () => {
 		}); 
 	});
 
+	it("Returns the proper values from it's selectors",() => {
+		const mockState = {
+			battletagSearch: {
+				loading:    true,
+				error:      "YOU DONE FUCKED UP",
+				battletags: mockBattletagArray,
+			},
+		};
+
+		const loading = selectBattletagSearchLoading(mockState);
+
+		const error = selectBattletagSearchError(mockState);
+
+		const battletags = selectBattletagSearchBattletags(mockState);
+
+		expect(loading).toBe(mockState.battletagSearch.loading);
+
+		expect(error).toBe(mockState.battletagSearch.error);
+
+		expect(battletags).toBe(mockState.battletagSearch.battletags);
+	});
 });

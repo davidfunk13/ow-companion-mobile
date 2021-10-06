@@ -65,8 +65,6 @@ describe("user account", () => {
 
 		const actual = await createAccountAsyncThunkAction(dispatch, () => "", undefined);
 
-		console.log({ actual , });
-
 		expect(actual.meta.arg).toEqual(mockSearchInput);
 
 		expect(actual.payload).toEqual("Something went wrong. (420)");
@@ -88,10 +86,9 @@ describe("user account", () => {
 
 		const actual = await createAccountAsyncThunkAction(dispatch, () => "", undefined);
 
-		console.log({ actual , });
-
 		expect(actual.meta.arg).toEqual(mockSearchInput);
 
 		expect(actual.payload).toEqual("No Battletags found. Please Try again.");
 	});
+
 });
