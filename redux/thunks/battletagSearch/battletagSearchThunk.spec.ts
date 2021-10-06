@@ -21,24 +21,28 @@ const mockBattletagArray: Battletag[] = [
 	},
 ];
 
-describe("user account", () => {
+describe("battletagSearch Thunk", () => {
 	afterEach(() => {
 		jest.restoreAllMocks();
 	});
 
-	it("should return data if status code equals 200", async () => {
+	it("Should return data if status code equals 200.", async () => {
 		const mockSearchInput = "Dave";
 
 		const dispatch = jest.fn();
 
 		const result: IHTTPResponse = {
 			status: 200,
-			data:   mockBattletagArray,   
+			data:   mockBattletagArray,
 		};
 
 		(axios.get as jest.MockedFunction<typeof axios.get>).mockResolvedValueOnce(result);
 
-		const createAccountAsyncThunkAction: AsyncThunkAction<unknown, unknown, any> = battletagSearch(mockSearchInput);
+		const createAccountAsyncThunkAction: AsyncThunkAction<
+			unknown,
+			unknown,
+			Record<string, never>
+		> = battletagSearch(mockSearchInput);
 
 		const actual = await createAccountAsyncThunkAction(dispatch, () => "", undefined);
 
@@ -48,8 +52,8 @@ describe("user account", () => {
 
 		expect(axios.get).toBeCalledWith(url + mockSearchInput);
 	});
-	
-	it("should return an error if status code equals anything other than 200", async () => {
+
+	it("Should return an error if status code equals anything other than 200.", async () => {
 		const mockSearchInput = "Dave";
 
 		const dispatch = jest.fn();
@@ -61,7 +65,11 @@ describe("user account", () => {
 
 		(axios.get as jest.MockedFunction<typeof axios.get>).mockResolvedValueOnce(result);
 
-		const createAccountAsyncThunkAction: AsyncThunkAction<unknown, unknown, Record<string, never>> = battletagSearch(mockSearchInput);
+		const createAccountAsyncThunkAction: AsyncThunkAction<
+			unknown,
+			unknown,
+			Record<string, never>
+		> = battletagSearch(mockSearchInput);
 
 		const actual = await createAccountAsyncThunkAction(dispatch, () => "", undefined);
 
@@ -70,7 +78,7 @@ describe("user account", () => {
 		expect(actual.payload).toEqual("Something went wrong. (420)");
 	});
 
-	it("should return an error if no results are found", async () => {
+	it("Should return an error if no results are found.", async () => {
 		const mockSearchInput = "Dave";
 
 		const dispatch = jest.fn();
@@ -82,7 +90,11 @@ describe("user account", () => {
 
 		(axios.get as jest.MockedFunction<typeof axios.get>).mockResolvedValueOnce(result);
 
-		const createAccountAsyncThunkAction: AsyncThunkAction<unknown, unknown, Record<string, never>> = battletagSearch(mockSearchInput);
+		const createAccountAsyncThunkAction: AsyncThunkAction<
+			unknown,
+			unknown,
+			Record<string, never>
+		> = battletagSearch(mockSearchInput);
 
 		const actual = await createAccountAsyncThunkAction(dispatch, () => "", undefined);
 
