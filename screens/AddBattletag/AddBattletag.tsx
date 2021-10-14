@@ -9,6 +9,7 @@ import { Button, Input, Text, } from "react-native-elements";
 import { NavigationProp, useFocusEffect, } from "@react-navigation/core";
 import React, { useCallback, useState, } from "react";
 import { ScrollView, View, } from "react-native";
+import { addThing, getAllThings, } from "../db";
 import {
 	resetBattletagSearchSlice,
 	selectBattletagSearchBattletags,
@@ -16,7 +17,6 @@ import {
 	selectBattletagSearchLoading,
 } from "../../redux/reducers/battletagSearchSlice/battletagSearchSlice";
 import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
-import { getData, setObjectValue, } from "../db";
 
 interface IAddBattletagScreenProps {
 	navigation?: NavigationProp<never, never>
@@ -33,7 +33,7 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 
 	const battletags = useAppSelector(selectBattletagSearchBattletags);
 
-	const [ state, setState , ] = useState();
+	const [ state, setState , ] = useState<any>();
 
 	useFocusEffect(
 		useCallback(() => {	
@@ -48,11 +48,7 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 			<Text h1 style={styles.elementPadding}>Add Battletag</Text>
 			<Text style={styles.elementPadding}>Add a new battletag to your app to track.</Text>
 			<Text style={styles.elementPadding}>CURRENT: {state}</Text>
-			<Button onPress={() => {
-				const data = getData();
-
-				data.then(stuff => console.log(stuff));
-			}} title={"sdfsdf"}/>
+			<Button onPress={() => getAllThings()} title={"get things"}/>
 			{!!searchError && <Text style={{
 				...styles.errorText,
 				...styles.elementPadding,
@@ -90,7 +86,7 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 			</Formik>
 			<ScrollView style={styles.scrollViewPadding}>
 				{battletags.map(battletag => {
-					return <Button onPress={() => setObjectValue(battletag)} key={battletag.id} title={battletag.name}/>;
+					return <Button onPress={() => addThing(JSON.stringify(battletag))} key={battletag.id} title={battletag.name}/>;
 				})}
 			</ScrollView>
 		</AppScreen>
