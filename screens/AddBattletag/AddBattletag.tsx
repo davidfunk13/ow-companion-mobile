@@ -1,15 +1,15 @@
+import AppDb from "../db";
 import AppScreen from "../../components/AppScreen/AppScreen";
 import BattletagSearchInput from "../../models/Inputs/BattletagSearchInput";
 import { Formik, } from "formik";
 import Icon from "react-native-vector-icons/AntDesign";
+import { ScrollView, } from "react-native";
 import battletagSearch from "../../redux/thunks/battletagSearch/battletagSearchThunk";
 import styles from "./AddBattletag.styles";
 import validationSchema from "./validationSchema";
 import { Button, Input, Text, } from "react-native-elements";
 import { NavigationProp, useFocusEffect, } from "@react-navigation/core";
 import React, { useCallback, useState, } from "react";
-import { ScrollView, View, } from "react-native";
-import { addThing, getAllThings, } from "../db";
 import {
 	resetBattletagSearchSlice,
 	selectBattletagSearchBattletags,
@@ -43,12 +43,22 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 		}, [ ])
 	);
 
+	interface Row {
+		length: number
+		_array: unknown[]
+	}
+	function stupidAssCb(values: any){
+		console.log(values);
+
+		setState(JSON.stringify(values._array));
+	}
+
 	return (
 		<AppScreen>
 			<Text h1 style={styles.elementPadding}>Add Battletag</Text>
 			<Text style={styles.elementPadding}>Add a new battletag to your app to track.</Text>
 			<Text style={styles.elementPadding}>CURRENT: {state}</Text>
-			<Button onPress={() => getAllThings()} title={"get things"}/>
+			<Button onPress={() => AppDb.getAllBattletags(stupidAssCb)} title={"get things"}/>
 			{!!searchError && <Text style={{
 				...styles.errorText,
 				...styles.elementPadding,
@@ -86,7 +96,7 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 			</Formik>
 			<ScrollView style={styles.scrollViewPadding}>
 				{battletags.map(battletag => {
-					return <Button onPress={() => addThing(JSON.stringify(battletag))} key={battletag.id} title={battletag.name}/>;
+					return <Button onPress={() => AppDb.saveBattletag(JSON.stringify(battletag))} key={battletag.id} title={battletag.name}/>;
 				})}
 			</ScrollView>
 		</AppScreen>

@@ -5,36 +5,50 @@ const db = SQLite.openDatabase("db.db");
 db.transaction((tx) => {
 	tx.executeSql(
 		"CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY NOT NULL, value TEXT);"
-	),() => "created table", () => "table existed";
+	), () => "created table", () => "table existed";
 });
 
-const value = 1;
+interface Row {
+	length: number
+	_array: unknown[]
+}
 
-export const addThing = (thing: string) => {
-	db.transaction(
-		//multiple SQL operations looks like this.
-		(tx) => {
-			tx.executeSql("INSERT INTO items (value) VALUES (?)", [ thing, ]);
+interface SQLResult {
+	insertId: number
+	rows: Row
+	rowsAffected: number
+}
 
-			tx.executeSql("SELECT * FROM items", [], (_, { rows, }) => console.log(JSON.stringify({
-				message: "select statement, here's your shit.",
-				rows,
-			}))
-			);
-		},
-		// error Callback,
-		(err: any) => console.log("you fucked up", err),
-		//success Callback
-		() => console.log("you did it")
-	);
-};
+class OwCompanionDB {
+	saveBattletag(thing: string) {
+		db.transaction(
+			//multiple SQL operations looks like this.
+			(tx) => {
+				tx.executeSql("INSERT INTO items (value) VALUES (?)", [ thing, ]);
 
-export const getAllThings = () => {
-	db.transaction((tx) => {
-		tx.executeSql(
-			`SELECT * FROM items;`,
-			[],
-			(_, { rows: { length, item, }, }) => console.log(length, item)
+				// tx.executeSql("SELECT * FROM items", [], (_, { rows, }) => console.log(JSON.stringify({
+				// 	message: "select statement, here's your shit.",
+				// 	rows,
+				// }))
+				// );
+			},
+			// error Callback,
+			(err: any) => console.log("you fucked up", err),
+			//success Callback
+			() => console.log("you did it")
 		);
-	});
-};
+	}
+
+	getAllBattletags(whyDoINeedThisCb: { (values: any): void; (arg0: SQLite.SQLResultSet): void; }) {
+
+		db.transaction((tx) => {
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			tx.executeSql(`SELECT * FROM items;`, [], (transactionObject, result) => whyDoINeedThisCb(result.rows));
+		});
+
+	}
+}
+
+const AppDb = new OwCompanionDB();
+
+export default AppDb;
