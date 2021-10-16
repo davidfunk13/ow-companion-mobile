@@ -1,15 +1,17 @@
 import AppDb from "../../db/db";
 import AppScreen from "../../components/AppScreen/AppScreen";
+import Battletag from "../../models/Battletag";
 import BattletagSearchInput from "../../models/Inputs/BattletagSearchInput";
+import { Card, } from "react-native-elements/dist/card/Card";
 import { Formik, } from "formik";
 import Icon from "react-native-vector-icons/AntDesign";
-import { ScrollView, View, } from "react-native";
 import battletagSearch from "../../redux/thunks/battletagSearch/battletagSearchThunk";
 import styles from "./AddBattletag.styles";
 import validationSchema from "./validationSchema";
 import { Button, Input, ListItem, Text, } from "react-native-elements";
 import { NavigationProp, useFocusEffect, } from "@react-navigation/core";
 import React, { useCallback, useState, } from "react";
+import { ScrollView, View, } from "react-native";
 import {
 	resetBattletagSearchSlice,
 	selectBattletagSearchBattletags,
@@ -17,9 +19,6 @@ import {
 	selectBattletagSearchLoading,
 } from "../../redux/reducers/battletagSearchSlice/battletagSearchSlice";
 import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
-import Battletag from "../../models/Battletag";
-import MyCard from "../../components/Card/Card";
-import { Card, } from "react-native-elements/dist/card/Card";
 
 interface IAddBattletagScreenProps {
 	navigation?: NavigationProp<never, never>
