@@ -1,13 +1,13 @@
-import AppDb from "../db";
+import AppDb from "../../db/db";
 import AppScreen from "../../components/AppScreen/AppScreen";
 import BattletagSearchInput from "../../models/Inputs/BattletagSearchInput";
 import { Formik, } from "formik";
 import Icon from "react-native-vector-icons/AntDesign";
-import { ScrollView, } from "react-native";
+import { ScrollView, View, } from "react-native";
 import battletagSearch from "../../redux/thunks/battletagSearch/battletagSearchThunk";
 import styles from "./AddBattletag.styles";
 import validationSchema from "./validationSchema";
-import { Button, Input, Text, } from "react-native-elements";
+import { Button, Input, ListItem, Text, } from "react-native-elements";
 import { NavigationProp, useFocusEffect, } from "@react-navigation/core";
 import React, { useCallback, useState, } from "react";
 import {
@@ -17,6 +17,9 @@ import {
 	selectBattletagSearchLoading,
 } from "../../redux/reducers/battletagSearchSlice/battletagSearchSlice";
 import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
+import Battletag from "../../models/Battletag";
+import MyCard from "../../components/Card/Card";
+import { Card, } from "react-native-elements/dist/card/Card";
 
 interface IAddBattletagScreenProps {
 	navigation?: NavigationProp<never, never>
@@ -33,7 +36,7 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 
 	const battletags = useAppSelector(selectBattletagSearchBattletags);
 
-	const [ state, setState , ] = useState<any>();
+	const [ state, setState , ] = useState<Battletag[]>([]);
 
 	useFocusEffect(
 		useCallback(() => {	
@@ -43,22 +46,28 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 		}, [ ])
 	);
 
-	interface Row {
-		length: number
-		_array: unknown[]
-	}
 	function stupidAssCb(values: any){
 		console.log(values);
 
-		setState(JSON.stringify(values._array));
+		setState(values._array);
 	}
 
 	return (
 		<AppScreen>
 			<Text h1 style={styles.elementPadding}>Add Battletag</Text>
 			<Text style={styles.elementPadding}>Add a new battletag to your app to track.</Text>
-			<Text style={styles.elementPadding}>CURRENT: {state}</Text>
+			<Text style={styles.elementPadding}>CURRENT: </Text>
 			<Button onPress={() => AppDb.getAllBattletags(stupidAssCb)} title={"get things"}/>
+			<ScrollView style={styles.elementPadding}>
+				<Card >
+					{state.map((item: Battletag, i) => { 
+						return <ListItem key={i} bottomDivider>
+							<Text>{item.name}</Text>
+							<Button onPress={() => AppDb.deleteOneBattletag(item.id, stupidAssCb)} title={"Delete"}/>
+						</ListItem>; 	
+					})}
+				</Card>
+			</ScrollView>
 			{!!searchError && <Text style={{
 				...styles.errorText,
 				...styles.elementPadding,
@@ -96,7 +105,7 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 			</Formik>
 			<ScrollView style={styles.scrollViewPadding}>
 				{battletags.map(battletag => {
-					return <Button onPress={() => AppDb.saveBattletag(JSON.stringify(battletag))} key={battletag.id} title={battletag.name}/>;
+					return <Button onPress={() => AppDb.saveBattletag(battletag)} key={battletag.id} title={battletag.name}/>;
 				})}
 			</ScrollView>
 		</AppScreen>
