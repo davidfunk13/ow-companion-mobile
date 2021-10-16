@@ -1,9 +1,14 @@
 {
     "preset": "jest-expo",
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/constants/themes.ts"
-  ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+        "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+        "**/*.{js,jsx,ts,tsx}",
+        "!**/coverage/**",
+        "!**/node_modules/**",
+        "!**/babel.config.js",
+        "!**/jest.setup.js"
     ]
-  }
+}
