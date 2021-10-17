@@ -4,6 +4,29 @@ import db from "../../../../db/db";
 import { getAllBattletags, } from "../../../../db/queries/battletag";
 import Battletag from "../../../../models/Battletag";
 
+
+
+// DO IT THIS WAY AND JUST DISPATCH YOUR OWN SUCCESS AND FAILURE AND LOADING ACTIONS
+// Ditch createAsyncThunk [after trying some async await reassignment stuff with old setup.] as last resort.
+// export function fetchGroupMeta() {
+// 	return (dispatch) => {
+// 	  dispatch(getGroupMeta());
+// 	  return db.transaction(txn => {
+// 		txn.executeSql(
+// 		  'SELECT * FROM group_meta',
+// 		  [],
+// 		  (_, result) => {
+// 			console.log('Result', result);
+// 			return dispatch(getGroupMetaSuccess(['fake', 'data']));
+// 		  },
+// 		  (_, error) => {
+// 			console.log('Error', error);
+// 			return dispatch(getGroupMetaFailure(error));
+// 		  }
+// 		);
+// 	  });
+// 	};
+
 const getAllBattletagsThunk = createAsyncThunk("battletag/getAll", async (_, { rejectWithValue, }) => {
 	let battArr: Battletag[] = [];
 
@@ -34,3 +57,4 @@ const getAllBattletagsThunk = createAsyncThunk("battletag/getAll", async (_, { r
 });
 
 export default getAllBattletagsThunk;
+  }
