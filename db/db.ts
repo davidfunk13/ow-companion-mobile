@@ -12,64 +12,65 @@ db.transaction(
 	() => console.log("Init successful.")
 );
 
-class OwCompanionDB {
-	saveBattletag({ id, isPublic, level, name, platform, playerLevel, portrait, urlName, }: Battletag) {
-		db.transaction(
-			(tx) => {
-				tx.executeSql(
-					insertBattletag,
-					[
-						id,
-						isPublic,
-						level,
-						name,
-						platform,
-						playerLevel,
-						portrait,
-						urlName, 
-					]
-				);
-			},
-			(err: unknown) => console.log("you fucked up", err),
-			() => console.log("Battletag successfully inserted.")
-		);
-	}
+// class OwCompanionDB {
+// 	saveBattletag({ id, isPublic, level, name, platform, playerLevel, portrait, urlName, }: Battletag) {
+// db.transaction(
+// 	(tx) => {
+// 		tx.executeSql(
+// 			insertBattletag,
+// 			[
+// 				id,
+// 				isPublic,
+// 				level,
+// 				name,
+// 				platform,
+// 				playerLevel,
+// 				portrait,
+// 				urlName, 
+// 			]
+// 		);
+// 	},
+// 	(err: unknown) => console.log("you fucked up", err),
+// 	() => console.log("Battletag successfully inserted.")
+// );
+// 	}
 
-	getAllBattletags(cb: { (values: unknown): void; (arg0: SQLite.SQLResultSet): void; }) {
-		db.transaction(
-			(tx) => {
-				tx.executeSql(getAllBattletags, [], (transactionObject, result) => {
-					console.log(result);
+// 	getAllBattletags(cb: (battletagArr: any[])=>any[]) {
+// 		db.transaction(
+// 			(tx) => {
+// 				tx.executeSql(getAllBattletags, [], (transactionObject, result) => {
+// 					console.log(result);
 
-					cb(result.rows);
-				});
-			},
-			(err: unknown) => console.log("Get ting all the battletags fucked up", err),
-			() => console.log("get all battletags successfull.")
-		);
-	}
+// 					return cb(result.rows as unknown as any[]);
+// 				});
+// 			},
+// 			(err: unknown) => console.log("Get ting all the battletags fucked up", err),
+// 			() => console.log("get all battletags successfull.")
+// 		);
+// 	}
 
-	deleteOneBattletag(id: number, cb: { (values: unknown): void; (arg0: SQLite.SQLResultSet): void; }) {
-		db.transaction(
-			(tx) => {
-				tx.executeSql(
-					deleteOneBattletagById,
-					[ id, ], (transactionObject, result) => {
-						console.log(result);
-					});
+// 	deleteOneBattletag(id: number, cb: { (values: unknown): void; (arg0: SQLite.SQLResultSet): void; }) {
+// 		db.transaction(
+// 			(tx) => {
+// 				tx.executeSql(
+// 					deleteOneBattletagById,
+// 					[ id, ],
+// 					(transactionObject, result) => {
+// 						console.log(result);
+// 					});
 
-				tx.executeSql(getAllBattletags, [], (transactionObject, result) => {
-					console.log(result);
+// 				tx.executeSql(getAllBattletags, [], (transactionObject, result) => {
+// 					console.log(result);
 	
-					cb(result.rows);
-				});
-			},
-			(err: unknown) => console.log("deleting one battletag fucked up.", err),
-			() => console.log("deleting one battletag was successful.")
-		);
-	}
-}
+// 					cb(result.rows);
+// 				});
+// 			},
+// 			(err: unknown) => console.log("deleting one battletag fucked up.", err),
+// 			() => console.log("deleting one battletag was successful.")
+// 		);
+// 	}
+// }
 
-const AppDb = new OwCompanionDB();
+// const AppDb = new OwCompanionDB();
 
-export default AppDb;
+export default db;
