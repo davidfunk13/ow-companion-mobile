@@ -1,21 +1,44 @@
-import Battletag from "../../../../models/Battletag";
-import SQLResponse from "../../../../models/responses/SQLResponse";
-import { createAsyncThunk, isFulfilled, } from "@reduxjs/toolkit";
+import { createAsyncThunk, } from "@reduxjs/toolkit";
+import { SQLResultSet, } from "expo-sqlite";
 import db from "../../../../db/db";
 import { getAllBattletags, } from "../../../../db/queries/battletag";
-import { Platform, } from "react-native";
-import { setBattletags, } from "../../../reducers/battletagsSlice/battletagsSlice";
-import { transactionAsync, } from "../../../../utils/transactionAsync";
+import Battletag from "../../../../models/Battletag";
 
-const getAllBattletagsThunk = createAsyncThunk(
-	"battletags/getAll",
-	async (_, { rejectWithValue, fulfillWithValue, dispatch, }) => {
+function processRows(results: SQLResultSet[]) {
+	const rows = results[0].rows;
+	
+	return (rows as unknown as { _array: Battletag[] })._array;
+}
 
-		const item = await transactionAsync([ { sql: getAllBattletags , } , ]);
+const getAllBattletagsThunk = createAsyncThunk("battletags/getAll",
+	async (_, { rejectWithValue, }) => {
+		const poo = new Promise((resolve, reject) => {
+			const results: SQLResultSet[] = [];
 
-		console.log({ fuckYou: item , });
-		
-		return item;
+			db.transaction((tx) => {
+
+				tx.executeSql(
+					getAllBattletags,
+					[],
+					(_, resSet) => results.push(resSet),
+					(err) => {
+						reject(err);
+
+						return true;
+					});
+
+			},
+			(err: unknown) => reject(err),
+			() => results[0].rows.length ? resolve(processRows(results)) : reject("No battletags Found."));
+		});
+
+		return poo.then(data => {console.log({ finalData: data , });
+
+			return data as Battletag[];})
+			.catch(err => rejectWithValue({
+				error:   err,
+				message: "You blew it kind of." , 
+			}));
 	});
 
 export default getAllBattletagsThunk;

@@ -1,6 +1,7 @@
 import Battletag from "../../../models/Battletag";
 import { RootState, } from "../../store";
-import { PayloadAction, createSlice, } from "@reduxjs/toolkit";
+import { createSlice, } from "@reduxjs/toolkit";
+import deleteBattletagThunk from "../../thunks/battletag/delete/deleteBattletagThunk";
 import getAllBattletagsThunk from "../../thunks/battletag/getAll/getAllBattletagsThunk";
 
 export interface IBattletagSliceState {
@@ -33,18 +34,25 @@ export const battletagsSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(getAllBattletagsThunk.pending, (state: IBattletagSliceState) => {
-				console.log("shit");
-
 				state.loading = true;
 			})
 			.addCase(getAllBattletagsThunk.fulfilled, (state: IBattletagSliceState, action) => {
 				state.loading = false;
 
-				console.log({ p: action.payload, });
-
 				state.battletags = action.payload;
 			})
 			.addCase(getAllBattletagsThunk.rejected, (state: IBattletagSliceState, action) => {
+				state.loading = false;
+
+				state.error = action.payload as string;
+			})
+			.addCase(deleteBattletagThunk.pending, (state: IBattletagSliceState) => {
+				state.loading = true;
+			})
+			.addCase(deleteBattletagThunk.fulfilled, (state: IBattletagSliceState, action) => {
+				state.loading = false;
+			})
+			.addCase(deleteBattletagThunk.rejected, (state: IBattletagSliceState, action) => {
 				state.loading = false;
 
 				state.error = action.payload as string;

@@ -21,7 +21,8 @@ import {
 import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
 import getAllBattletagsThunk from "../../redux/thunks/battletag/getAll/getAllBattletagsThunk";
 import saveBattletagThunk from "../../redux/thunks/battletag/save/saveBattletagThunk";
-import { selectBattletags, selectBattletagsLoading, } from "../../redux/reducers/battletagsSlice/battletagsSlice";
+import { selectBattletags, selectBattletagsError, selectBattletagsLoading, } from "../../redux/reducers/battletagsSlice/battletagsSlice";
+import deleteBattletagThunk from "../../redux/thunks/battletag/delete/deleteBattletagThunk";
 
 interface IAddBattletagScreenProps {
 	navigation?: NavigationProp<never, never>
@@ -42,6 +43,8 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 
 	const battletags = useAppSelector(selectBattletags);
 
+	const battletagsError = useAppSelector(selectBattletagsError);
+
 	useFocusEffect(
 		useCallback(() => {	
 			return () => {
@@ -59,10 +62,11 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 			<Button onPress={() => dispatch(getAllBattletagsThunk())} title={"get things"}/>
 			<ScrollView style={styles.elementPadding}>
 				<Card >
+					<Text style={styles.errorText}>{JSON.stringify(battletagsError)}</Text>
 					{battletags.map((item: Battletag, i) => { 
 						return <ListItem key={i} bottomDivider>
 							<Text>{item.name}</Text>
-							<Button onPress={() => console.log("fuck you.")}title={"Delete"}/>
+							<Button onPress={() => dispatch(deleteBattletagThunk(item.id))}title={"Delete"}/>
 						</ListItem>; 
 					})}
 				</Card>
