@@ -3,7 +3,7 @@ interface Battletag {
     isPublic: boolean
     level: number
     name: string
-    platform: "pc" | "xbox" | "playstation" | "nintendo-switch"
+    platform: string
     playerLevel: number
     portrait: string
     urlName: string

@@ -1,7 +1,7 @@
 import Battletag from "../../../models/Battletag";
 import { RootState, } from "../../store";
-import getAllBattletagsThunk from "../../thunks/battletag/getAll/getAllBattletagsThunk";
 import { PayloadAction, createSlice, } from "@reduxjs/toolkit";
+import getAllBattletagsThunk from "../../thunks/battletag/getAll/getAllBattletagsThunk";
 
 export interface IBattletagSliceState {
 	loading: boolean
@@ -19,6 +19,9 @@ export const battletagsSlice = createSlice({
 	name:     "battletags",
 	initialState,
 	reducers: {
+		setBattletags: (state, action) => {
+			state.battletags = action.payload;
+		},
 		resetBattletagsSlice: (state: IBattletagSliceState) => {
 			state.loading = initialState.loading;
 
@@ -27,26 +30,32 @@ export const battletagsSlice = createSlice({
 			state.error = initialState.error;
 		},
 	},
-	extraReducers: builder => builder
-		.addCase(getAllBattletagsThunk.pending, (state: IBattletagSliceState) => {
-			state.loading = true;
-		})
-		.addCase(getAllBattletagsThunk.fulfilled, (state: IBattletagSliceState, action) => {
-			state.loading = false;
+	extraReducers: (builder) => {
+		builder
+			.addCase(getAllBattletagsThunk.pending, (state: IBattletagSliceState) => {
+				console.log("shit");
 
-			state.battletags = action.payload;
-		})
-		.addCase(getAllBattletagsThunk.rejected, (state: IBattletagSliceState, action) => {
-			state.loading = false;
+				state.loading = true;
+			})
+			.addCase(getAllBattletagsThunk.fulfilled, (state: IBattletagSliceState, action) => {
+				state.loading = false;
 
-			state.error = action.payload as string;
-		}),
+				console.log({ p: action.payload, });
+
+				state.battletags = action.payload;
+			})
+			.addCase(getAllBattletagsThunk.rejected, (state: IBattletagSliceState, action) => {
+				state.loading = false;
+
+				state.error = action.payload as string;
+			});
+	},
 });
 
 export const selectBattletagsLoading = (state: RootState) => state.battletags.loading;
 export const selectBattletags = (state: RootState) => state.battletags.battletags;
 export const selectBattletagsError = (state: RootState) => state.battletags.error;
 
-export const { resetBattletagsSlice, } = battletagsSlice.actions;
+export const { resetBattletagsSlice, setBattletags, } = battletagsSlice.actions;
 
 export default battletagsSlice.reducer;

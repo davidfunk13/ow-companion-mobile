@@ -21,6 +21,7 @@ import {
 import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
 import getAllBattletagsThunk from "../../redux/thunks/battletag/getAll/getAllBattletagsThunk";
 import saveBattletagThunk from "../../redux/thunks/battletag/save/saveBattletagThunk";
+import { selectBattletags, selectBattletagsLoading, } from "../../redux/reducers/battletagsSlice/battletagsSlice";
 
 interface IAddBattletagScreenProps {
 	navigation?: NavigationProp<never, never>
@@ -35,9 +36,11 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 
 	const searchError = useAppSelector(selectBattletagSearchError);
 
-	const battletags = useAppSelector(selectBattletagSearchBattletags);
+	const searchBattletags = useAppSelector(selectBattletagSearchBattletags);
 
-	const [ state, setState, ] = useState<Battletag[]>([]);
+	const battletagsLoading = useAppSelector(selectBattletagsLoading);
+
+	const battletags = useAppSelector(selectBattletags);
 
 	useFocusEffect(
 		useCallback(() => {	
@@ -50,16 +53,17 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 	return (
 		<AppScreen>
 			<Text h1 style={styles.elementPadding}>Add Battletag</Text>
+			<Text h1 style={styles.elementPadding}>{battletagsLoading && "loading..."}</Text>
 			<Text style={styles.elementPadding}>Add a new battletag to your app to track.</Text>
 			<Text style={styles.elementPadding}>CURRENT: </Text>
 			<Button onPress={() => dispatch(getAllBattletagsThunk())} title={"get things"}/>
 			<ScrollView style={styles.elementPadding}>
 				<Card >
-					{state.map((item: Battletag, i) => { 
+					{battletags.map((item: Battletag, i) => { 
 						return <ListItem key={i} bottomDivider>
 							<Text>{item.name}</Text>
-							{/* <Button onPress={() => AppDb.deleteOneBattletag(item.id, stupidAssCb)} title={"Delete"}/> */}
-						</ListItem>; 	
+							<Button onPress={() => console.log("fuck you.")}title={"Delete"}/>
+						</ListItem>; 
 					})}
 				</Card>
 			</ScrollView>
@@ -99,7 +103,7 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 				)}
 			</Formik>
 			<ScrollView style={styles.scrollViewPadding}>
-				{battletags.map(battletag => {
+				{searchBattletags.map(battletag => {
 					return <Button onPress={() => dispatch(saveBattletagThunk(battletag))} key={battletag.id} title={battletag.name}/>;
 				})}
 			</ScrollView>
