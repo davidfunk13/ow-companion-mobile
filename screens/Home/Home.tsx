@@ -1,9 +1,8 @@
 import AppScreen from "../../components/AppScreen/AppScreen";
 import React, { useCallback, useEffect , } from "react";
-import { Card, Text, } from "react-native-elements";
+import { Button, Card, Text , } from "react-native-elements";
 import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
 import getAllBattletagsThunk from "../../redux/thunks/battletag/getAll/getAllBattletagsThunk";
-import { Button, } from "react-native-elements/dist/buttons/Button";
 import { ScrollView, } from "react-native-gesture-handler";
 import styles from "./Home.styles";
 import { selectBattletags, selectBattletagsError, } from "../../redux/reducers/battletagsSlice/battletagsSlice";
@@ -32,6 +31,13 @@ const HomeScreen = ({ navigation, }: IHomeScreenProps) => {
 		}, [])
 	);
 
+	function handleDelete (id:number){
+
+		dispatch(deleteBattletagThunk(id));
+
+		getAllBattletagsThunk();
+	}
+	
 	return (
 		<AppScreen>
 			<Text h1>Welcome</Text>
@@ -44,7 +50,7 @@ const HomeScreen = ({ navigation, }: IHomeScreenProps) => {
 					{battletags.map((item: Battletag, i) => {
 						return <ListItem key={i} bottomDivider>
 							<Text>{item.name}</Text>
-							<Button onPress={() => dispatch(deleteBattletagThunk(item.id))} title={"Delete"} />
+							<Button onPress={() => handleDelete(item.id)} title={"Delete"} />
 						</ListItem>;
 					})}
 				</Card>
