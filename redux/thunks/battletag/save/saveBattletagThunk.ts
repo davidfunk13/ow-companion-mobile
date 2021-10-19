@@ -1,7 +1,7 @@
+import Battletag from "../../../../models/Battletag";
 import { createAsyncThunk, } from "@reduxjs/toolkit";
 import db from "../../../../db/db";
 import { getAllBattletags, insertBattletag, } from "../../../../db/queries/battletag";
-import Battletag from "../../../../models/Battletag";
 
 const saveBattletagThunk = createAsyncThunk("battletag/save", async (battletag: Battletag, { rejectWithValue, }) => {
 	const {
@@ -14,8 +14,6 @@ const saveBattletagThunk = createAsyncThunk("battletag/save", async (battletag: 
 		portrait,
 		urlName, 
 	} = battletag;
-
-	console.log("fuck you.");
 
 	db.transaction(
 		(tx) => {

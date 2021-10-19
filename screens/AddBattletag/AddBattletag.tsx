@@ -1,29 +1,27 @@
-import AppDb from "../../db/db";
 import AppScreen from "../../components/AppScreen/AppScreen";
 import Battletag from "../../models/Battletag";
 import BattletagSearchInput from "../../models/Inputs/BattletagSearchInput";
 import { Card, } from "react-native-elements/dist/card/Card";
 import { Formik, } from "formik";
 import Icon from "react-native-vector-icons/AntDesign";
+import { ScrollView, View, } from "react-native";
 import battletagSearch from "../../redux/thunks/battletagSearch/battletagSearchThunk";
+import deleteBattletagThunk from "../../redux/thunks/battletag/delete/deleteBattletagThunk";
+import getAllBattletagsThunk from "../../redux/thunks/battletag/getAll/getAllBattletagsThunk";
+import saveBattletagThunk from "../../redux/thunks/battletag/save/saveBattletagThunk";
 import styles from "./AddBattletag.styles";
 import validationSchema from "./validationSchema";
 import { Button, Input, ListItem, Text, } from "react-native-elements";
-import { NavigationProp, useFocusEffect, } from "@react-navigation/core";
-import React, { useCallback, useState, } from "react";
-import { ScrollView, View, } from "react-native";
+import { NavigationProp, useFocusEffect, useNavigation, } from "@react-navigation/core";
+import React, { useCallback, useEffect, } from "react";
 import {
 	resetBattletagSearchSlice,
 	selectBattletagSearchBattletags,
 	selectBattletagSearchError,
 	selectBattletagSearchLoading,
 } from "../../redux/reducers/battletagSearchSlice/battletagSearchSlice";
-import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
-import getAllBattletagsThunk from "../../redux/thunks/battletag/getAll/getAllBattletagsThunk";
-import saveBattletagThunk from "../../redux/thunks/battletag/save/saveBattletagThunk";
 import { selectBattletags, selectBattletagsError, selectBattletagsLoading, } from "../../redux/reducers/battletagsSlice/battletagsSlice";
-import deleteBattletagThunk from "../../redux/thunks/battletag/delete/deleteBattletagThunk";
-
+import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
 interface IAddBattletagScreenProps {
 	navigation?: NavigationProp<never, never>
 }
@@ -44,37 +42,62 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 	const battletags = useAppSelector(selectBattletags);
 
 	const battletagsError = useAppSelector(selectBattletagsError);
+	
+	const navigation = useNavigation();
+	
+	// useFocusEffect(
+	// 	useCallback(() => {
+	// 		return () => {
+	// 			dispatch(resetBattletagSearchSlice());
+	// 		};
+	// 	}, [])
+	// );
+	
+	function handleSave (battletag: Battletag) {
+		dispatch(saveBattletagThunk(battletag));
 
-	useFocusEffect(
-		useCallback(() => {	
-			return () => {
-				dispatch(resetBattletagSearchSlice());
-			};
-		}, [ ])
-	);
+		navigation.navigate("Home" as any);
+	}
 
 	return (
 		<AppScreen>
-			<Text h1 style={styles.elementPadding}>Add Battletag</Text>
-			<Text h1 style={styles.elementPadding}>{battletagsLoading && "loading..."}</Text>
-			<Text style={styles.elementPadding}>Add a new battletag to your app to track.</Text>
-			<Text style={styles.elementPadding}>CURRENT: </Text>
-			<Button onPress={() => dispatch(getAllBattletagsThunk())} title={"get things"}/>
+			<Text h1 >Add Battletag</Text>
+			<Text h1 >{battletagsLoading && "loading..."}</Text>
+			<Text >Add a new battletag to your app to track.</Text>
+			<ScrollView style={styles.scrollViewPadding}>
+				{searchBattletags.map(battletag => {
+					return <View key={battletag.id} style={{ padding: 10 , }}> 
+						<Button
+							style={{ margin: 60 , }}
+							onPress={() => handleSave(battletag) }
+							title={battletag.name}
+						/>
+					</View>;
+				})}
+			
+			</ScrollView>
+			{/* <Text style={styles.elementPadding}>CURRENT: </Text> */}
+			{/* <Button onPress={() => dispatch(getAllBattletagsThunk())} title={"get things"} /> */}
+
+			{/* <Text style={styles.errorText}>{JSON.stringify(battletagsError)}</Text>
 			<ScrollView style={styles.elementPadding}>
 				<Card >
-					<Text style={styles.errorText}>{JSON.stringify(battletagsError)}</Text>
-					{battletags.map((item: Battletag, i) => { 
+					{battletags.map((item: Battletag, i) => {
 						return <ListItem key={i} bottomDivider>
 							<Text>{item.name}</Text>
-							<Button onPress={() => dispatch(deleteBattletagThunk(item.id))}title={"Delete"}/>
-						</ListItem>; 
+							<Button onPress={() => dispatch(deleteBattletagThunk(item.id))} title={"Delete"} />
+						</ListItem>;
 					})}
 				</Card>
 			</ScrollView>
-			{!!searchError && <Text style={{
-				...styles.errorText,
-				...styles.elementPadding,
-			}}>{searchError}</Text>}
+			{!!searchError &&
+				<Text style={{
+					...styles.errorText,
+					...styles.elementPadding,
+				}}>
+					{searchError}
+				</Text>
+			} */}
 			<Formik
 				validateOnBlur={false}
 				validateOnMount={false}
@@ -106,11 +129,6 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 					</>
 				)}
 			</Formik>
-			<ScrollView style={styles.scrollViewPadding}>
-				{searchBattletags.map(battletag => {
-					return <Button onPress={() => dispatch(saveBattletagThunk(battletag))} key={battletag.id} title={battletag.name}/>;
-				})}
-			</ScrollView>
 		</AppScreen>
 	);
 };

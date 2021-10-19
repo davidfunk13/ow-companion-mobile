@@ -10,7 +10,8 @@ function processRows(results: SQLResultSet[]) {
 	return (rows as unknown as { _array: Battletag[] })._array;
 }
 
-const getAllBattletagsThunk = createAsyncThunk("battletags/getAll",
+const getAllBattletagsThunk = createAsyncThunk(
+	"battletags/getAll",
 	async (_, { rejectWithValue, }) => {
 		const poo = new Promise((resolve, reject) => {
 			const results: SQLResultSet[] = [];
@@ -32,9 +33,7 @@ const getAllBattletagsThunk = createAsyncThunk("battletags/getAll",
 			() => results[0].rows.length ? resolve(processRows(results)) : reject("No battletags Found."));
 		});
 
-		return poo.then(data => {console.log({ finalData: data , });
-
-			return data as Battletag[];})
+		return poo.then(data => data as Battletag[])
 			.catch(err => rejectWithValue({
 				error:   err,
 				message: "You blew it kind of." , 
