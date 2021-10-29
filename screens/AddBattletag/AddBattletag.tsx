@@ -62,7 +62,6 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 	return (
 		<AppScreen>
 			<Text h1 >Add Battletag</Text>
-			<Text h1 >{battletagsLoading && "loading..."}</Text>
 			<Text >Add a new battletag to your app to track.</Text>
 			<ScrollView style={styles.scrollViewPadding}>
 				{searchBattletags.map(battletag => {
@@ -76,28 +75,6 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 				})}
 			
 			</ScrollView>
-			{/* <Text style={styles.elementPadding}>CURRENT: </Text> */}
-			{/* <Button onPress={() => dispatch(getAllBattletagsThunk())} title={"get things"} /> */}
-
-			{/* <Text style={styles.errorText}>{JSON.stringify(battletagsError)}</Text>
-			<ScrollView style={styles.elementPadding}>
-				<Card >
-					{battletags.map((item: Battletag, i) => {
-						return <ListItem key={i} bottomDivider>
-							<Text>{item.name}</Text>
-							<Button onPress={() => dispatch(deleteBattletagThunk(item.id))} title={"Delete"} />
-						</ListItem>;
-					})}
-				</Card>
-			</ScrollView>
-			{!!searchError &&
-				<Text style={{
-					...styles.errorText,
-					...styles.elementPadding,
-				}}>
-					{searchError}
-				</Text>
-			} */}
 			<Formik
 				validateOnBlur={false}
 				validateOnMount={false}
