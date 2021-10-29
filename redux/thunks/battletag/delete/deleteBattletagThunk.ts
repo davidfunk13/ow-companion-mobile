@@ -5,6 +5,8 @@ import db from "../../../../db/db";
 import { deleteOneBattletagById, } from "../../../../db/queries/battletag";
 
 function processRows(results: any[]) {
+	console.log(results);
+
 	const rows = results[0].rows;
 
 	return (rows as unknown as { _array: Battletag[] })._array[0];

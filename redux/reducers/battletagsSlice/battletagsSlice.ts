@@ -37,19 +37,23 @@ export const battletagsSlice = createSlice({
 				state.loading = true;
 			})
 			.addCase(getAllBattletagsThunk.fulfilled, (state: IBattletagSliceState, action) => {
+				state.error = initialState.error;
+
 				state.loading = false;
 
-				state.battletags = action.payload;
+				state.battletags = action.payload as Battletag[];
 			})
 			.addCase(getAllBattletagsThunk.rejected, (state: IBattletagSliceState, action) => {
 				state.loading = false;
+
+				state.battletags = [];
 
 				state.error = action.payload as string;
 			})
 			.addCase(deleteBattletagThunk.pending, (state: IBattletagSliceState) => {
 				state.loading = true;
 			})
-			.addCase(deleteBattletagThunk.fulfilled, (state: IBattletagSliceState, action) => {
+			.addCase(deleteBattletagThunk.fulfilled, (state: IBattletagSliceState) => {
 				state.loading = false;
 			})
 			.addCase(deleteBattletagThunk.rejected, (state: IBattletagSliceState, action) => {

@@ -30,7 +30,7 @@ const getAllBattletagsThunk = createAsyncThunk(
 
 			},
 			(err: unknown) => reject(err),
-			() => results[0].rows.length ? resolve(processRows(results)) : reject("No battletags Found."));
+			() => resolve(processRows(results)));
 		});
 
 		return poo.then(data => data as Battletag[])
