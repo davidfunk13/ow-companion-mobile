@@ -22,6 +22,7 @@ import {
 } from "../../redux/reducers/battletagSearchSlice/battletagSearchSlice";
 import { selectBattletags, selectBattletagsError, selectBattletagsLoading, } from "../../redux/reducers/battletagsSlice/battletagsSlice";
 import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
+import BattletagList from "../../components/BattletagList/BattletagList";
 interface IAddBattletagScreenProps {
 	navigation?: NavigationProp<never, never>
 }
@@ -64,7 +65,7 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 			<Text h1 >Add Battletag</Text>
 			<Text >Add a new battletag to your app to track.</Text>
 			<ScrollView style={styles.scrollViewPadding}>
-				{searchBattletags.map(battletag => {
+				{/* {searchBattletags.map(battletag => {
 					return <View key={battletag.id} style={{ padding: 10 , }}> 
 						<Button
 							style={{ margin: 60 , }}
@@ -72,8 +73,8 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 							title={battletag.name}
 						/>
 					</View>;
-				})}
-			
+				})} */}
+				<BattletagList battletagAction={handleSave} battletags={searchBattletags}/>
 			</ScrollView>
 			<Formik
 				validateOnBlur={false}
