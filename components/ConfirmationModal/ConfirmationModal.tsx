@@ -8,16 +8,16 @@ import React, { FC, } from "react";
 
 interface IConfirmationModalProps {
 	heading: string
+	data: Battletag
 	message: string
-	confirmAction: (id:number) => void
+	confirmAction: () => void
 	confirmActionLoading: boolean
 	cancelAction: () => void
-	item: Battletag
 }
 
-const ConfirmationModal: FC<IConfirmationModalProps> = ({ item, heading, message, confirmAction, confirmActionLoading, cancelAction, }) => {
+const ConfirmationModal: FC<IConfirmationModalProps> = ({ heading, message, confirmAction, confirmActionLoading, cancelAction, }) => {
 	const open = useAppSelector(selectModalOpen);
-	
+
 	return (
 		<Overlay
 			onBackdropPress={() => cancelAction()}
@@ -33,10 +33,10 @@ const ConfirmationModal: FC<IConfirmationModalProps> = ({ item, heading, message
 				<Button
 					title={"Cancel"}
 					buttonStyle={styles.cancelButton}
-					onPress={() => cancelAction()} 
+					onPress={() => cancelAction()}
 				/>
 				<Button
-					onPress={() => confirmAction(item.id)}
+					onPress={() => confirmAction()}
 					loading={confirmActionLoading}
 					buttonStyle={styles.deleteButton}
 					icon={

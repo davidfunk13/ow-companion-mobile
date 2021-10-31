@@ -2,7 +2,7 @@ import { StyleSheet, } from "react-native";
 
 const styles = StyleSheet.create({
 	header: {
-		height:         "100%",
+		height:         "auto",
 		width:          "100%",
 		resizeMode:     "cover",
 		display:        "flex",

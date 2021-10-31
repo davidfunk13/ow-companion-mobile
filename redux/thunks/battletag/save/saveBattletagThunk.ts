@@ -29,7 +29,7 @@ const saveBattletagThunk = createAsyncThunk("battletag/save",
 			])
 			.then(() => console.log("Successfully created new Battletag"))
 			.catch(err => rejectWithValue({
-				error:   err,
+				error:   err.toString(),
 				message: "You blew it kind of.",
 			}));
 	});

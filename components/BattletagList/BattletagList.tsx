@@ -7,16 +7,16 @@ import { View, } from "react-native";
 import deleteBattletagThunk from "../../redux/thunks/battletag/delete/deleteBattletagThunk";
 import getAllBattletagsThunk from "../../redux/thunks/battletag/getAll/getAllBattletagsThunk";
 import icons from "../../icons.json";
-import { setModalOpen, } from "../../redux/reducers/modalSlice/modalSlice";
 import styles from "./BattletagList.styles";
 import { Avatar, Card, Icon, ListItem, Text, } from "react-native-elements";
 import React, { FC, } from "react";
-import { selectBattletagsLoading, selectDeleteBattletagLoading, selectSelectedBattletag, setSelectedBattletag, } from "../../redux/reducers/battletagsSlice/battletagsSlice";
+import { selectBattletagsLoading, selectDeleteBattletagLoading, } from "../../redux/reducers/battletagsSlice/battletagsSlice";
+import { selectModalData, setModalData, setModalOpen, } from "../../redux/reducers/modalSlice/modalSlice";
 import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
 
 interface IBattletagListProps {
 	battletags: Battletag[]
-	battletagAction: (battletag: Battletag) => void
+	battletagAction: (dispatch: AppDispatch, battletag: Battletag) => void
 	enableDelete?: boolean
 }
 
@@ -35,7 +35,7 @@ export function handleClose(dispatch: AppDispatch) {
 export function handleSelectBattletagForDelete(dispatch: AppDispatch, data: Battletag) {
 	dispatch(setModalOpen(true));
 
-	dispatch(setSelectedBattletag(data));
+	dispatch(setModalData(data));
 }
 
 const BattletagList: FC<IBattletagListProps> = ({ battletags, battletagAction, enableDelete, }) => {
@@ -44,8 +44,8 @@ const BattletagList: FC<IBattletagListProps> = ({ battletags, battletagAction, e
 	const deleteBattletagLoading = useAppSelector(selectDeleteBattletagLoading);
 
 	const battletagsLoading = useAppSelector(selectBattletagsLoading);
-
-	const selectedBattletag = useAppSelector(selectSelectedBattletag);
+	
+	const modalData = useAppSelector(selectModalData);
 	
 	return (
 		<Card containerStyle={styles.cardContainer}>
@@ -55,7 +55,7 @@ const BattletagList: FC<IBattletagListProps> = ({ battletags, battletagAction, e
 				<ListItem 
 					key={i}
 					bottomDivider
-					onPress={() => battletagAction(b)}
+					onPress={() => battletagAction(dispatch, b)}
 				>
 					<Avatar source={{ uri: (icons as IconList)[b.portrait].icon, }} />
 					<ListItem.Content>
@@ -72,12 +72,12 @@ const BattletagList: FC<IBattletagListProps> = ({ battletags, battletagAction, e
 			))}
 
 			<ConfirmationModal
-				item={selectedBattletag as Battletag}
+				data={modalData as Battletag}
 				cancelAction={() => handleClose(dispatch)}
 				confirmActionLoading={deleteBattletagLoading}
-				confirmAction={() => handleDelete(dispatch, selectedBattletag?.id as number)}
+				confirmAction={() => handleDelete(dispatch, modalData?.id as number)}
 				heading={"Are you sure?"}
-				message={`Delete battletag (${selectedBattletag?.id}) and all of its associated data?. This cannot be undone.`}
+				message={`Delete battletag (${modalData?.id}) and all of its associated data?. This cannot be undone.`}
 			/>
 		</Card>
 	);

@@ -4,16 +4,16 @@ import theme from "../../theme";
 const styles = StyleSheet.create({
 	container:       { flex: 1, },
 	headerContainer: {
-		flexDirection:   "row",
-		justifyContent:  "space-between",
-		alignItems:      "center",
-		backgroundColor: theme.palette.overwatchPurple,
-		marginBottom:    10,
-		height:          90,
+		paddingTop:    20,
+		paddingBottom: 20,
 	},
-	logoutIcon:   { padding: theme.spacing.xxs, },
-	logoutButton: { backgroundColor: theme.palette.common.error, },
-	headerText:   { color: theme.palette.common.white, },
+	logoutIcon:     { padding: theme.spacing.xxs, },
+	logoutButton:   { backgroundColor: theme.palette.common.error, },
+	headerText:     { color: theme.palette.common.white, },
+	headerTextBold: {
+		color:    theme.palette.common.white,
+		fontSize: 15, 
+	},
 
 });
 
