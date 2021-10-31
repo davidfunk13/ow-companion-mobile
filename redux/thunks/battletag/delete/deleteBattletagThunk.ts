@@ -5,8 +5,6 @@ import db from "../../../../db/db";
 import { deleteOneBattletagById, } from "../../../../db/queries/battletag";
 
 function processRows(results: any[]) {
-	console.log(results);
-
 	const rows = results[0].rows;
 
 	return (rows as unknown as { _array: Battletag[] })._array[0];
@@ -14,6 +12,8 @@ function processRows(results: any[]) {
 
 const deleteBattletagThunk = createAsyncThunk("battletags/deleteOne",
 	async (id:number, { rejectWithValue, }) => {
+		console.log({ fuckinid: id, });
+
 		const poo = new Promise((resolve, reject) => {
 			const results: SQLResultSet[] = [];
 

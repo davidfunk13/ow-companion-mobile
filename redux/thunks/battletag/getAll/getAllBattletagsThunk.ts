@@ -1,8 +1,8 @@
-import { createAsyncThunk, } from "@reduxjs/toolkit";
+import Battletag from "../../../../models/Battletag";
 import { SQLResultSet, } from "expo-sqlite";
+import { createAsyncThunk, } from "@reduxjs/toolkit";
 import db from "../../../../db/db";
 import { getAllBattletags, } from "../../../../db/queries/battletag";
-import Battletag from "../../../../models/Battletag";
 
 function processRows(results: SQLResultSet[]) {
 	const rows = results[0].rows;
