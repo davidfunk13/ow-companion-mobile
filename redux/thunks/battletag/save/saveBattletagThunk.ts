@@ -15,7 +15,7 @@ const saveBattletagThunk = createAsyncThunk("battletag/save",
 			portrait,
 			urlName, 
 		} = battletag;
-	
+		
 		return AppDb.makeTransaction(insertBattletag,
 			[
 				id,
@@ -28,10 +28,13 @@ const saveBattletagThunk = createAsyncThunk("battletag/save",
 				urlName, 
 			])
 			.then(() => console.log("Successfully created new Battletag"))
-			.catch(err => rejectWithValue({
-				error:   err.toString(),
-				message: "You blew it kind of.",
-			}));
+			.catch(err => {
+				console.log(err);
+
+				rejectWithValue({
+					error:   JSON.stringify(err),
+					message: "You blew it kind of.",
+				});});
 	});
 
 export default saveBattletagThunk;

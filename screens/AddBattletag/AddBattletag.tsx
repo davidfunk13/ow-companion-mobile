@@ -1,3 +1,4 @@
+import { AppDispatch, } from "../../redux/store";
 import AppScreen from "../../components/AppScreen/AppScreen";
 import Battletag from "../../models/Battletag";
 import BattletagList from "../../components/BattletagList/BattletagList";
@@ -25,14 +26,18 @@ interface IAddBattletagScreenProps {
 
 const initialValues: BattletagSearchInput = { battletag: "", };
 
+export function handleSave (dispatch: AppDispatch, battletag: Battletag, navigation: NavigationProp<never, never>) {
+	dispatch(saveBattletagThunk(battletag));
+
+	navigation.navigate("Home" as never);
+}
+
 const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 	const dispatch = useAppDispatch();
 
 	const searchLoading = useAppSelector(selectBattletagSearchLoading);
 
 	const searchBattletags = useAppSelector(selectBattletagSearchBattletags);
-	
-	const navigation = useNavigation();
 	
 	useFocusEffect(
 		useCallback(() => {
@@ -41,12 +46,6 @@ const AddBattletagScreen: React.FC<IAddBattletagScreenProps> = () => {
 			};
 		}, [])
 	);
-	
-	function handleSave (battletag: Battletag) {
-		dispatch(saveBattletagThunk(battletag));
-
-		navigation.navigate("Home" as never);
-	}
 
 	return (
 		<AppScreen>

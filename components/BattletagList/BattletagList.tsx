@@ -8,6 +8,7 @@ import deleteBattletagThunk from "../../redux/thunks/battletag/delete/deleteBatt
 import getAllBattletagsThunk from "../../redux/thunks/battletag/getAll/getAllBattletagsThunk";
 import icons from "../../icons.json";
 import styles from "./BattletagList.styles";
+import { useNavigation, } from "@react-navigation/core";
 import { Avatar, Card, Icon, ListItem, Text, } from "react-native-elements";
 import React, { FC, } from "react";
 import { selectBattletagsLoading, selectDeleteBattletagLoading, } from "../../redux/reducers/battletagsSlice/battletagsSlice";
@@ -16,7 +17,10 @@ import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
 
 interface IBattletagListProps {
 	battletags: Battletag[]
-	battletagAction: (dispatch: AppDispatch, battletag: Battletag) => void
+	battletagAction: (dispatch: AppDispatch,
+	battletag: Battletag,
+	navigation?: any
+) => void
 	enableDelete?: boolean
 }
 
@@ -46,6 +50,8 @@ const BattletagList: FC<IBattletagListProps> = ({ battletags, battletagAction, e
 	const battletagsLoading = useAppSelector(selectBattletagsLoading);
 	
 	const modalData = useAppSelector(selectModalData);
+
+	const navigation = useNavigation();	
 	
 	return (
 		<Card containerStyle={styles.cardContainer}>
@@ -55,7 +61,7 @@ const BattletagList: FC<IBattletagListProps> = ({ battletags, battletagAction, e
 				<ListItem 
 					key={i}
 					bottomDivider
-					onPress={() => battletagAction(dispatch, b)}
+					onPress={() => battletagAction(dispatch, b, navigation)}
 				>
 					<Avatar source={{ uri: (icons as IconList)[b.portrait].icon, }} />
 					<ListItem.Content>
