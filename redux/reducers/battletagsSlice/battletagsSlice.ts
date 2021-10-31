@@ -16,7 +16,7 @@ const initialState: IBattletagSliceState = {
 	loading:       false,
 	deleteLoading: false,
 	battletags:    [],
-	selected:      undefined,
+	selected:      undefined, 
 	error:         "",
 };
 

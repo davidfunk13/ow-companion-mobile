@@ -4,11 +4,7 @@ import { createAsyncThunk, } from "@reduxjs/toolkit";
 
 const battletagSearch = createAsyncThunk("battletagSearch/search",
 	async (searchValue: string, { rejectWithValue, }) => {
-		const apiString = "https://playoverwatch.com/en-us/search/account-by-name/";
-
-		const uri = encodeURIComponent(searchValue);
-
-		const response = await axios.get<Battletag[]>(encodeURI(apiString + uri));
+		const response = await axios.get<Battletag[]>(`https://playoverwatch.com/en-us/search/account-by-name/${encodeURIComponent(searchValue)}`);
 
 		if (response.status !== 200) {
 			return rejectWithValue(`Something went wrong. (${response.status})`);

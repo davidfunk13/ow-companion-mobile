@@ -1,9 +1,10 @@
+import Battletag from "../../models/Battletag";
 import { View, } from "react-native";
+import { selectModalOpen, } from "../../redux/reducers/modalSlice/modalSlice";
+import styles from "./ConfirmationModal.styles";
+import { useAppSelector, } from "../../redux/hooks";
 import { Button, Divider, Icon, Overlay, Text, } from "react-native-elements";
 import React, { FC, } from "react";
-import { selectModalOpen, setModalOpen, } from "../../redux/reducers/modalSlice/modalSlice";
-import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
-import styles from "../AppScreen/AppScreen.styles";
 
 interface IConfirmationModalProps {
 	heading: string
@@ -11,44 +12,41 @@ interface IConfirmationModalProps {
 	confirmAction: (id:number) => void
 	confirmActionLoading: boolean
 	cancelAction: () => void
+	item: Battletag
 }
 
-const ConfirmationModal: FC<IConfirmationModalProps> = ({ heading, message, confirmAction, confirmActionLoading, cancelAction, }) => {
-	const dispatch = useAppDispatch();
-
+const ConfirmationModal: FC<IConfirmationModalProps> = ({ item, heading, message, confirmAction, confirmActionLoading, cancelAction, }) => {
 	const open = useAppSelector(selectModalOpen);
 	
 	return (
-		<Overlay overlayStyle={{ padding: 10, }} onBackdropPress={() => dispatch(setModalOpen(false))} isVisible={open}>
+		<Overlay
+			onBackdropPress={() => cancelAction()}
+			overlayStyle={styles.overlaySpacing}
+			isVisible={open}
+		>
 			<Text h4>{heading}</Text>
-			<Text >{message}</Text>
-			<View style={{
-				padding:        20,
-				display:        "flex",
-				flexDirection:  "row", 
-				justifyContent: "space-evenly",
-				width:          "auto",
-			}}>
-				<Button 
-					onPress={() => cancelAction()} 
-					buttonStyle={{ minWidth: 100, }}
+			<View style={styles.dividerSpacing}>
+				<Divider />
+			</View>
+			<Text>{message}</Text>
+			<View style={styles.buttonContainer}>
+				<Button
 					title={"Cancel"}
+					buttonStyle={styles.cancelButton}
+					onPress={() => cancelAction()} 
 				/>
 				<Button
-					onPress={() => confirmAction()}
+					onPress={() => confirmAction(item.id)}
 					loading={confirmActionLoading}
-					buttonStyle={{
-						minWidth:        100,
-						backgroundColor: "red", 
-					}}
+					buttonStyle={styles.deleteButton}
 					icon={
 						<Icon
 							name={"close"}
 							type={"antdesign"}
 							color={"white"}
-							tvParallaxProperties={undefined}						/>
+							tvParallaxProperties={undefined}
+						/>
 					}
-					
 					title={"Delete"}
 				/>
 			</View>
