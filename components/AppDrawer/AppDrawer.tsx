@@ -35,11 +35,15 @@ const AppDrawer = (props: IAppDrawerProps) => {
 			</DrawerContentScrollView>
 			<Button
 				buttonStyle={styles.logoutButton}
-				icon={<Icon size={24}
-					color={theme.palette.common.white}
-					style={styles.logoutIcon}
-					name={"logout"} 
-				/>}
+				icon={
+					<Icon 
+						size={24}
+						color={theme.palette.common.white}
+						style={styles.logoutIcon}
+						name={"logout"}
+						tvParallaxProperties={undefined}
+					/>
+				}
 				title={"Log out"}
 			/>
 		</View>

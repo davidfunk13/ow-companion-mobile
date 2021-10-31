@@ -1,7 +1,7 @@
 import * as SQLite from "expo-sqlite";
 import Battletag from "../models/Battletag";
 import { SQLResultSet, } from "expo-sqlite";
-import { initDb, } from "./initDb";
+import { initDb, } from "./queries/initDb";
 
 const db = SQLite.openDatabase("db.db");
 

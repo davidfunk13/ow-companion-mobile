@@ -11,14 +11,16 @@ import React, { FC, } from "react";
 import { selectBattletagsLoading, selectDeleteBattletagLoading, selectSelectedBattletag, setSelectedBattletag, } from "../../redux/reducers/battletagsSlice/battletagsSlice";
 import { selectModalOpen, setModalOpen, } from "../../redux/reducers/modalSlice/modalSlice";
 import { useAppDispatch, useAppSelector, } from "../../redux/hooks";
+import { Divider, } from "react-native-elements/dist/divider/Divider";
+import styles from "./BattletagList.styles";
 
 interface IBattletagListProps {
-    battletags: Battletag[]
-    battletagAction: (battletag: Battletag) => void
-    enableDelete?: boolean
+	battletags: Battletag[]
+	battletagAction: (battletag: Battletag) => void
+	enableDelete?: boolean
 }
 
-export async function handleDelete (dispatch: AppDispatch, id: number){
+export async function handleDelete(dispatch: AppDispatch, id: number) {
 	await dispatch(deleteBattletagThunk(id));
 
 	dispatch(setModalOpen(false));
@@ -26,11 +28,11 @@ export async function handleDelete (dispatch: AppDispatch, id: number){
 	dispatch(getAllBattletagsThunk());
 }
 
-export function handleClose(dispatch: AppDispatch){
+export function handleClose(dispatch: AppDispatch) {
 	dispatch(setModalOpen(false));
 }
 
-export function handleSelectBattletagForDelete(dispatch: AppDispatch, data: Battletag){
+export function handleSelectBattletagForDelete(dispatch: AppDispatch, data: Battletag) {
 	dispatch(setModalOpen(true));
 
 	dispatch(setSelectedBattletag(data));
@@ -46,50 +48,55 @@ const BattletagList: FC<IBattletagListProps> = ({ battletags, battletagAction, e
 	const modalOpen = useAppSelector(selectModalOpen);
 
 	const selectedBattletag = useAppSelector(selectSelectedBattletag);
-	
+
 	return (
 		<Card containerStyle={{ padding: 0, }}>
-			{!battletags.length && !battletagsLoading && <View style={{
-				padding:        20,
-				display:        "flex",
-				flexDirection:  "row",
-				justifyContent: "center", 
-			}}><Text >No Battletags found!</Text></View>}
-			{battletagsLoading && <LoadingSpinner/>}
+			{!battletags.length && !battletagsLoading && <View style={styles.showEmptyStateContainer}><Text >No Battletags found!</Text></View>}
+			{battletagsLoading && <LoadingSpinner />}
 
 			{battletags.map((b, i) => (
-				<ListItem onPress={() => battletagAction(b)} key={i} bottomDivider>
+				<ListItem 
+					key={i}
+					bottomDivider
+					onPress={() => battletagAction(b)}
+				>
 					<Avatar source={{ uri: "https://via.placeholder.com/150", }} />
 					<ListItem.Content>
 						<ListItem.Title>{b.urlName}</ListItem.Title>
 						<ListItem.Subtitle>{b.platform}</ListItem.Subtitle>
 					</ListItem.Content>
-					{enableDelete && <Icon onPress={() => handleSelectBattletagForDelete(dispatch, b)} color={"red"} name={"close"} tvParallaxProperties={undefined}></Icon>}					
+					{enableDelete && <Icon
+						color={"red"}
+						name={"close"} 
+						onPress={() => handleSelectBattletagForDelete(dispatch, b)} 
+						tvParallaxProperties={undefined}
+					/>}
 				</ListItem>
 			))}
 
-			<Overlay onBackdropPress={() => handleClose(dispatch)} backdropStyle={{ padding: 10, }} overlayStyle={{ padding: 10, }} isVisible={modalOpen}>
+			{/* dont stay comfortable with not making this 100% re-usable. */}
+			<Overlay
+				onBackdropPress={() => handleClose(dispatch)}
+				overlayStyle={styles.overlaySpacing}
+				isVisible={modalOpen}
+			>
 				<Text h4>Are you sure?</Text>
-				<Text >Please confirm you want to delete this battletag ({selectedBattletag?.id}) and all of its associated data. This cannot be undone. </Text>
-				<View style={{
-					padding:        20,
-					display:        "flex",
-					flexDirection:  "row", 
-					justifyContent: "space-evenly",
-					width:          "auto",
-				}}>
+				<View style={styles.dividerSpacing}>
+					<Divider />
+				</View>
+				<Text>Delete battletag ({selectedBattletag?.id}) and all of its associated data?. This cannot be undone.</Text>
+				<View style={styles.buttonContainer}>
 					<Button
-						onPress={() => handleClose(dispatch)} 
-						buttonStyle={{ minWidth: 100, }}
 						title={"Cancel"}
+						buttonStyle={styles.cancelButton}
+						onPress={() => handleClose(dispatch)} 
 					/>
 					<Button
-						onPress={() => handleDelete(dispatch, selectedBattletag?.id as number )}
+						//i really dont like this possibly being undefined. perhaps working with a zero'd value in the store,
+						//  or putting a conditional here to  dispatch a different action if theres not an id
+						onPress={() => handleDelete(dispatch, selectedBattletag?.id as number)}
 						loading={deleteBattletagLoading}
-						buttonStyle={{
-							minWidth:        100,
-							backgroundColor: "red", 
-						}}
+						buttonStyle={styles.deleteButton}
 						icon={
 							<Icon
 								name={"close"}
